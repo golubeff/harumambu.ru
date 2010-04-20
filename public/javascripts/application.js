@@ -25,8 +25,9 @@ $(document).ready(function(){
         appendProject( eval('(' + data + ')') );
       }
     });
-  }, 3000 );
+  }, 5000 );
 });
+
 
 function appendProject(json, after){
   $(json).each( function(i, project) {
@@ -46,6 +47,7 @@ function appendProject(json, after){
     }else if(after){
       $('.project:last').after(html);
     }else{
+      document.title = (project.budjet.match(/[^ ]/) ? project.budjet + " — " : "") + project.title;
       $('.project:first').before(html);
     }
   } );
