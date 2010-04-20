@@ -25,12 +25,10 @@ def process(klass)
     project_data[:klass] = klass.name
     project_data.delete(:attachments)
     project_id = $projects_db.insert(project_data)
-    puts "inserted #{klass.name} #{project_id} : #{project_data[:remote_id]}"
 
     if attachments.is_a?(Array)
       attachments.each do |attachment|
         id = $attachments_db.insert(attachment.update(:project_id => project_id))
-        puts "attachment #{id} for #{project_id}"
       end
     end
   end
