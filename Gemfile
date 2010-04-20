@@ -19,3 +19,5 @@ end
 gem 'i18n', '0.3.6'
 gem 'haml', '3.0.0.beta.2'#, :require => false, :git => "git://github.com/golubeff/haml.git"
 gem 'hpricot', '0.8.2', :require => false
+gem 'mime-types'
+gem 'treetop'
