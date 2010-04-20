@@ -1,0 +1,9 @@
+    { 
+      'id' : <%= project.id %>, 
+      'budjet' : '<%=raw project.budjet_with_currency %>', 
+      'title' : '<%=raw project.title %>', 
+      'desc' : '<%=raw project.attributes['desc'] %>',
+      'created_at' : '<%=l project.created_at %>',
+      'url' : '<%= project.url %>'
+    }
+

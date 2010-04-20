@@ -1,0 +1,6 @@
+[
+<%=raw(@projects.map do |project|
+  render :partial => "projects/project.js", :object => project
+end.join(','))
+%>
+]

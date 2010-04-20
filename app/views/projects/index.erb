@@ -1,0 +1,17 @@
+<div id="projects"></div>
+<div id="notifier"><a href="javascript:;" onclick="window.scroll(0, 0)">↑</a></div>
+<div id="loader"></div>
+<div id="feedback">
+  <% form_tag :feedback, :remote => true  do |f| %>
+    <%= text_area_tag :feedback_message, @feedback.message, :onclick => "$(this).addClass('hover')"%><br/>
+    <%= submit_tag 'Отправить' %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    <% @projects.each do |project| %>
+      appendProject(<%=raw project_json(project) %>);
+    <% end %>
+});
+</script>
