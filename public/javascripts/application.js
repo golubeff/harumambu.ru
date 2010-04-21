@@ -47,7 +47,7 @@ function appendProject(json, after){
     }else if(after){
       $('.project:last').after(html);
     }else{
-      document.title = (project.budjet.match(/[^ ]/) ? project.budjet + " — " : "") + project.title;
+      document.title = '➘ ' + (project.budjet.match(/[^ ]/) ? project.budjet + " — " : "") + project.title;
       $('.project:first').before(html);
     }
   } );
