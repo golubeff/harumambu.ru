@@ -40,7 +40,11 @@ loop do
     FreeLanceRu,
     WeblancerRu
   ].each do |klass|
-    process(klass)
+    begin
+      process(klass)
+    rescue Exception => e
+    rescue Timeout::Error => e
+    end
   end
   sleep 5
 end
