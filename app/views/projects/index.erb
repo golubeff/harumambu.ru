@@ -9,7 +9,7 @@
 <div id="loader"></div>
 <div id="sources">
   <% SOURCES.each do |source| %>
-    <div><input type="checkbox" checked="checked" id="source_<%= source.name %>" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
+    <div><input type="checkbox" checked="checked" disabled="disabled" id="source_<%= source.name %>" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
   <% end %>
 </div>
 <div id="feedback">
