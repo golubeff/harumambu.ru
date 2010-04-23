@@ -24,7 +24,7 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    #run "cd #{current_path} && ./script/grabber.rb stop && sleep 10 && ./script/grabber.rb start"
+    run "cd #{current_path} && ./script/grabber.rb stop && sleep 10 && ./script/grabber.rb start"
     run "thin stop -C #{current_path}/config/thin.yml && thin start -C #{current_path}/config/thin.yml"
   end
   task :config do
