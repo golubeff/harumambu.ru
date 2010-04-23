@@ -37,7 +37,9 @@ function appendProject(json, after){
     var stop_words = $('#stop_words').val().replace(/,/, ' ').split(/ +/);
     var matches = false;
     for(var i=0; !matches && i<stop_words.length; i++) {
-      matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).match(new RegExp(stop_words[i], 'i'));
+      if(stop_words[i].match(/[^ ]/)){
+        matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).match(new RegExp(stop_words[i], 'i'));
+      }
     }
 
     if (matches) { sound() }
