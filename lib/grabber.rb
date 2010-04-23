@@ -6,6 +6,7 @@ require 'iconv'
 require 'yaml'
 require File.dirname(__FILE__) + '/../lib/free_lance_ru.rb'
 require File.dirname(__FILE__) + '/../lib/weblancer_ru.rb'
+require File.dirname(__FILE__) + '/../lib/freelance_ru.rb'
 require File.dirname(__FILE__) + '/../lib/sources.rb'
 
 config = YAML::load_file( File.join( File.dirname(__FILE__), '../config/database.yml' ) )[ENV['RAILS_ENV'] || 'development']

@@ -2,7 +2,7 @@
       'id' : <%= project.id %>, 
       'budjet' : '<%=raw project.budjet_with_currency %>', 
       'title' : '<%=raw project.title %>', 
-      'desc' : '<%=raw project.attributes['desc'] %>',
+      'desc' : '<%=raw(project.attributes['desc']).gsub(/\n/, '<br/>') %>',
       'created_at' : '<%=l project.created_at %>',
       'url' : '<%= project.url %>',
       'klass' : '<%= project.klass %>'
