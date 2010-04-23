@@ -34,7 +34,7 @@ function appendProject(json, after){
     var g = 150 + Math.floor(Math.random() * 100)
     var b = 150 + Math.floor(Math.random() * 100);
 
-    var stop_words = $('#stop_words').val().replace(/,/, ' ').split(/ +/);
+    var stop_words = $('#stop_words').val().replace(/,/g, ' ').split(/ +/);
     var matches = false;
     for(var i=0; !matches && i<stop_words.length; i++) {
       if(stop_words[i].match(/[^ ]/)){
