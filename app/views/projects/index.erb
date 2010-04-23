@@ -11,12 +11,15 @@
   <% SOURCES.each do |source| %>
     <div><input type="checkbox" checked="checked" disabled="disabled" id="source_<%= source.name %>" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
   <% end %>
-</div>
-<div id="feedback">
-  <% form_tag :feedback, :remote => true  do |f| %>
-    <%= text_area_tag :feedback_message, @feedback.message, :onclick => "$(this).addClass('hover')"%><br/>
-    <%= submit_tag 'Отправить' %>
-  <% end %>
+  <div id="twitter"><a href="/twitter"><img src="/images/twitter.png" alt="" /></a></div>
+
+  <div id="feedback">
+    <% form_tag :feedback, :remote => true  do |f| %>
+      <%= text_area_tag :feedback_message, @feedback.message, :onclick => "$(this).addClass('hover')"%><br/>
+      <%= submit_tag 'Отправить' %>
+    <% end %>
+  </div>
+
 </div>
 
 <script type="text/javascript">
