@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_filter :new_feedback, :only => [ :index ]
 
   def index
-    @projects.reverse!
+    @projects.reverse! unless params[:last_id]
 
     respond_to do |format|
       format.js { render :layout => false }
