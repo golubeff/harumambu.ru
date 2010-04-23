@@ -6,7 +6,8 @@ module ApplicationHelper
       'title' : '#{project.title }', 
       'desc' : '#{project.attributes['desc'] }',
       'created_at' : '#{l project.created_at }',
-      'url' : '#{ project.url }'
+      'url' : '#{ project.url }',
+      'klass' : '#{project.klass}'
     }"
   end
 end

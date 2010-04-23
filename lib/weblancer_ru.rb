@@ -1,6 +1,10 @@
 class WeblancerRu
   CURRENCIES = { 'USD' => "$" }
 
+  def self.desc
+    'weblancer.net'
+  end
+
   def self.latest
     doc = Hpricot(open('http://weblancer.net'))
     args = {}

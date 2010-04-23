@@ -7,7 +7,7 @@ body { font-family: Georgia; font-size: 16px }
 #loader { position: absolute; margin-top: -100px; margin-left: 650px  }
 #notifier { position: fixed; top: 10px; right: 45px; font-size: 104px }
 #notifier a { text-decoration: none }
-#feedback { position: fixed; bottom: 20px; right: 10px }
+#feedback { position: fixed; bottom: 0px; right: 30px }
 textarea, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #666; }
 #feedback textarea { width: 200px; height: 100px; color: #666 }
 #feedback textarea.hover { color: #000; width: 300px; height: 300px }
@@ -16,3 +16,4 @@ textarea, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #
 #flashbanner { position: absolute; left: -1000px }
 #controls { margin-bottom: 10px }
 #stop_words { width: 300px }
+#sources { position: fixed; right: 30px; bottom: 200px }

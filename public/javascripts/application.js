@@ -30,34 +30,38 @@ $(document).ready(function(){
 
 function appendProject(json, after){
   $(json).each( function(i, project) {
-    var r = 150 + Math.floor(Math.random() * 100);
-    var g = 150 + Math.floor(Math.random() * 100)
-    var b = 150 + Math.floor(Math.random() * 100);
+    if(!after || $('#source_' + project.klass + ':checked').length > 0){
+      var r = 150 + Math.floor(Math.random() * 100);
+      var g = 150 + Math.floor(Math.random() * 100)
+      var b = 150 + Math.floor(Math.random() * 100);
 
-    var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
-    var matches = false;
-    for(var i=0; !matches && i<stop_words.length; i++) {
-      if(stop_words[i].match(/[^ ]/)){
-        matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).replace(/ё/, 'е').match(new RegExp(stop_words[i], 'i'));
+      var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
+      var matches = false;
+      for(var i=0; !matches && i<stop_words.length; i++) {
+        if(stop_words[i].match(/[^ ]/)){
+          matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).replace(/ё/, 'е').match(new RegExp(stop_words[i], 'i'));
+        }
       }
-    }
 
-    if (matches) { sound() }
+      if (matches) { sound() }
 
-    html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
-      '<strong>' + project.budjet + '</strong>' +
-      '<h3><a href="' + project.url + '">' + project.title + '</a></h3>' +
-      '<p>' + project.desc + '</p>' +
-      '<div class="created_at">' + project.created_at + '</div>' +
-    '</div>';
+      html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
+        '<strong>' + project.budjet + '</strong>' +
+        '<h3><a href="' + project.url + '">' + project.title + '</a></h3>' +
+        '<p>' + project.desc + '</p>' +
+        '<div class="created_at">' + project.created_at + '</div>' +
+      '</div>';
 
-    if( $('.project').length == 0 ) {
-      $('#projects').html(html);
-    }else if(after){
-      $('.project:last').after(html);
+      if( $('.project').length == 0 ) {
+        $('#projects').html(html);
+      }else if(after){
+        $('.project:last').after(html);
+      }else{
+        document.title = '➘ ' + (project.budjet.match(/[^ ]/) ? project.budjet + " — " : "") + project.title;
+        $('.project:first').before(html);
+      }
     }else{
-      document.title = '➘ ' + (project.budjet.match(/[^ ]/) ? project.budjet + " — " : "") + project.title;
-      $('.project:first').before(html);
+      window.console.log('skip: ' + project.klass);
     }
   } );
 }

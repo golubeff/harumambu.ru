@@ -2,6 +2,11 @@ require 'hpricot'
 
 class FreeLanceRu
   
+  def self.desc
+    'free-lance.ru'
+  end
+
+  
   CURRENCIES = { 'Р.' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
   def self.latest

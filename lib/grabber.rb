@@ -6,6 +6,7 @@ require 'iconv'
 require 'yaml'
 require File.dirname(__FILE__) + '/../lib/free_lance_ru.rb'
 require File.dirname(__FILE__) + '/../lib/weblancer_ru.rb'
+require File.dirname(__FILE__) + '/../lib/sources.rb'
 
 config = YAML::load_file( File.join( File.dirname(__FILE__), '../config/database.yml' ) )[ENV['RAILS_ENV'] || 'development']
 
@@ -36,10 +37,7 @@ def process(klass)
 end
 
 loop do
-  [ 
-    FreeLanceRu,
-    WeblancerRu
-  ].each do |klass|
+  SOURCES.each do |klass|
     begin
       process(klass)
     rescue Exception => e
