@@ -34,11 +34,11 @@ function appendProject(json, after){
     var g = 150 + Math.floor(Math.random() * 100)
     var b = 150 + Math.floor(Math.random() * 100);
 
-    var stop_words = $('#stop_words').val().replace(/,/g, ' ').split(/ +/);
+    var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
     var matches = false;
     for(var i=0; !matches && i<stop_words.length; i++) {
       if(stop_words[i].match(/[^ ]/)){
-        matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).match(new RegExp(stop_words[i], 'i'));
+        matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).replace(/ё/, 'е').match(new RegExp(stop_words[i], 'i'));
       }
     }
 
