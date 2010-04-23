@@ -2,7 +2,7 @@ require 'hpricot'
 
 class FreeLanceRu
   
-  CURRENCIES = { 'Р.' => "руб.", "$" => '$', '&euro;' => '&euro;', "FM" => 'FM' }
+  CURRENCIES = { 'Р.' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
   def self.latest
     doc = Hpricot(open('http://free-lance.ru/'))

@@ -1,3 +1,7 @@
+<div id="flashbanner"></div>
+<div id="controls">
+  <a href="javascript:;" onclick="document.location.href='/?q=' + $('#stop_words').val()">Выделять проекты, содержащие слова</a>: <input id="stop_words" value="<%= params[:q] %>" /> 
+</div>
 <div id="projects"></div>
 <div id="notifier"><a href="javascript:;" onclick="window.scroll(0, 0)">↑</a></div>
 <div id="loader"></div>
@@ -15,3 +19,6 @@ $(document).ready(function(){
     <% end %>
 });
 </script>
+
+
+

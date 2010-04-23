@@ -28,14 +28,21 @@ $(document).ready(function(){
   }, 5000 );
 });
 
-
 function appendProject(json, after){
   $(json).each( function(i, project) {
     var r = 150 + Math.floor(Math.random() * 100);
     var g = 150 + Math.floor(Math.random() * 100)
     var b = 150 + Math.floor(Math.random() * 100);
 
-    html = '<div style="background: rgb('+r+','+g+','+b+')" class="project" id="' + project.id + '">' + 
+    var stop_words = $('#stop_words').val().replace(/,/, ' ').split(/ +/);
+    var matches = false;
+    for(var i=0; !matches && i<stop_words.length; i++) {
+      matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).match(new RegExp(stop_words[i], 'i'));
+    }
+
+    if (matches) { sound() }
+
+    html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
       '<strong>' + project.budjet + '</strong>' +
       '<h3><a href="' + project.url + '">' + project.title + '</a></h3>' +
       '<p>' + project.desc + '</p>' +
@@ -51,4 +58,13 @@ function appendProject(json, after){
       $('.project:first').before(html);
     }
   } );
+}
+
+function sound(){
+  var so = new SWFObject('/player.swf','flashContent','300','250','9');
+  so.addParam('allowfullscreen','true');
+  so.addParam('allowscriptaccess','always');
+  so.addParam('bgcolor','#FFFFFF');
+  so.addParam('flashvars','file=message.mp3&autostart=true');
+  so.write('flashbanner');
 }
