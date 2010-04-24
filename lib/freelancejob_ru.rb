@@ -26,8 +26,11 @@ class FreelancejobRu
       budjet = convert((project_div/"i").inner_html.to_s)
       currency = convert((project_div/"u").inner_html.to_s)
       if budjet
-        args[:budjet] = budjet.gsub(/[^\d]+/, '').to_f
-    	args[:currency] = currency
+        value = budjet.gsub(/[^\d]+/, '').to_f
+        if value > 0
+          args[:budjet] = budjet.gsub(/[^\d]+/, '').to_f
+          args[:currency] = currency
+        end
       end
 
       #args[:created_at] = convert(stats.children.last.content.gsub(/^(&nbsp;)+/, ''))
