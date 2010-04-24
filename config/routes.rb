@@ -52,6 +52,7 @@ Freelance::Application.routes.draw do |map|
   resources :projects
   match "feedback", :to => "feedback#create"
   match "twitter/connected", :to => "twitter#write"
+  match "a.php", :to => "application#redirect"
 
   # See how all your routes lay out with "rake routes"
 

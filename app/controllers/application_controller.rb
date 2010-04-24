@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   def index
   end
 
+  def redirect
+    redirect_to params[:href]
+  end
+
 end
