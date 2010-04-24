@@ -13,4 +13,8 @@ class Project < ActiveRecord::Base
   def budjet
     self.attributes['budjet'].to_i.to_f == self.attributes['budjet'] ? self.attributes['budjet'].to_i : self.attributes['budjet']
   end
+
+  def desc
+    self.attributes['desc'].gsub(/[\n\r]/m, '').gsub(/(<br *\/?>)+/m, '<br/>')
+  end
 end
