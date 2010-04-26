@@ -18,3 +18,4 @@ textarea, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #
 #sources { position: fixed; right: 30px; bottom: 0px }
 #twitter { margin: 10px }
 a img { border: 0 }
+.project img { float: left; margin-right: 5px }

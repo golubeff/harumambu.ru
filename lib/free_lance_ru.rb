@@ -6,7 +6,6 @@ class FreeLanceRu
     'free-lance.ru'
   end
 
-  
   CURRENCIES = { 'Р.' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
   def self.latest

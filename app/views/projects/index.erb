@@ -26,7 +26,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     <% @projects.each do |project| %>
-      appendProject(<%=raw project_json(project) %>);
+      appendProject(<%= render :partial => "projects/project.js", :object => project %>);
     <% end %>
 });
 </script>
