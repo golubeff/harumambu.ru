@@ -18,11 +18,34 @@ class ProjectsController < ApplicationController
 
   def finder_options
     options = { 
-      :include => [ :attachments ]
+      #:include => [ :attachments ]
     }
 
-    options[:conditions] = [ "projects.id < ?", params[:last_id] ] if params[:last_id]
-    options[:conditions] = [ "projects.id > ?", params[:first_id] ] if params[:first_id]
+    conditions = []
+    bindings = []
+
+    if params[:last_id].to_i > 0
+      conditions << "projects.id < ?"
+      bindings << params[:last_id]
+    end
+
+    if params[:first_id].to_i > 0
+      conditions << "projects.id > ?"
+      bindings << params[:first_id]
+    end
+
+    if params[:q] && params[:strict]
+      conditions << 'title ilike ? or "desc" ilike ?'
+      2.times { bindings << "%#{params[:q]}%" }
+    end
+
+    unless conditions.empty?
+      options[:conditions] = [ '(' + conditions.join(') AND (') + ')' ]
+      options[:conditions] << bindings
+      options[:conditions].flatten!
+    end
+
+    p options
 
     options
   end

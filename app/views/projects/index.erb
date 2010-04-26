@@ -2,6 +2,7 @@
 <div id="controls">
   <form method="get" action="/">
     Выделить проекты, содержащие: <input name="q" id="stop_words" value="<%= params[:q] %>" />
+    <input type="checkbox" <%= 'checked="checked"' if params[:strict] %> id="strict" name="strict" value="1" /> <label for="strict">строгий поиск</label>
   </form>
 </div>
 <div id="projects"></div>

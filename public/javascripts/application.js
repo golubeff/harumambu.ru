@@ -7,7 +7,9 @@ $(document).ready(function(){
       $('div#loader').html('<img src="/images/bigLoader.gif">');
 
       window.setTimeout( function(){
-        $.get("/projects.js?last_id=" + $('.project:last').attr('id'),
+        var url = '/projects.js?last_id=' + $('.project:last').attr('id');
+        if( $('#strict:checked').val() ) { url += '&strict=1&q=' + $('#stop_words').val() }
+        $.get(url,
         function(data){
           if (data != "") {
             appendProject(eval('(' + data + ')'), true);
@@ -19,8 +21,10 @@ $(document).ready(function(){
   });
 
   setInterval( function(){
+    var url = '/projects.js?first_id=' + $('.project:first').attr('id');
+    if( $('#strict:checked').val() ) { url += '&strict=1&q=' + $('#stop_words').val() }
     $.ajax({
-      'url': '/projects.js?first_id=' + $('.project:first').attr('id'), 
+      'url': url, 
       'success': function(data){
         appendProject( eval('(' + data + ')') );
       }
@@ -35,15 +39,18 @@ function appendProject(json, after){
       var g = 150 + Math.floor(Math.random() * 100)
       var b = 150 + Math.floor(Math.random() * 100);
 
-      var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
+      var strict = $('#strict:checked').val();
       var matches = false;
-      for(var i=0; !matches && i<stop_words.length; i++) {
-        if(stop_words[i].match(/[^ ]/)){
-          matches = (project.url + ' ' + project.budjet + ' ' + project.title + ' ' + project.desc).replace(/ё/, 'е').match(new RegExp(stop_words[i], 'i'));
+      if (!strict){
+        var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
+        for(var i=0; !matches && i<stop_words.length; i++) {
+          if(stop_words[i].match(/[^ ]/)){
+            matches = (project.title + ' ' + project.desc).replace(/ё/, 'е').match(new RegExp(stop_words[i], 'i'));
+          }
         }
-      }
 
-      if (matches) { sound() }
+        if (matches) { sound() }
+      }
 
       html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
         '<strong>' + project.budjet + '</strong>' +
