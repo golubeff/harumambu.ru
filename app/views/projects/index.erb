@@ -8,7 +8,24 @@
 <div id="projects"></div>
 <div id="notifier"><a href="javascript:;" onclick="window.scroll(0, 0)">↑</a></div>
 <div id="loader"></div>
+<div id="categories" class="jqmWindow">
+  <form method="post" action="/categories">
+    <input type="hidden" name="redirect_to" value="<%= request.fullpath %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+    <% Category.top.each do |category| %>
+      <div class="category">
+        <input type="checkbox" value="1" name="categories[<%= category.id %>]" <%= want_category?(category.id) ? 'checked="checked"' : '' %> onclick="window.checked = this.checked;$(this).parent().children('.child').children('input').map(function(i, elem){elem.checked=window.checked})" id="category_<%= category.id %>" /> <label for="category_<%= category.id %>"><%= category.title %></label>
+        <% category.categories.each do |subcategory| %>
+          <div class="child"><input name="categories[<%= subcategory.id %>]" value="1" type="checkbox" <%= want_category?(subcategory.id) ? 'checked="checked"' : '' %> id="category_<%= subcategory.id %>" /> <label for="category_<%= subcategory.id %>"><%= subcategory.title %></label></div>
+        <% end %>
+      </div>
+    <% end %>
+    <div style="clear: both">&nbsp;</div>
+    <center><input type="submit" value="Ок" /> <input type="button" class="jqmClose" value="Закрыть" /></center>
+  </form>
+</div>
 <div id="sources">
+  <a href="#" class="jqModal">Выбрать категории</a><br/><br/>
   <% SOURCES.each do |source| %>
     <div><input type="checkbox" checked="checked" disabled="disabled" id="source_<%= source.name %>" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
   <% end %>
@@ -28,8 +45,6 @@ $(document).ready(function(){
     <% @projects.each do |project| %>
       appendProject(<%= render :partial => "projects/project.js", :object => project %>);
     <% end %>
+    $('#categories').jqm();
 });
 </script>
-
-
-

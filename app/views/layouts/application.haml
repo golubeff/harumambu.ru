@@ -6,7 +6,10 @@
     = javascript_include_tag "rails"
     = javascript_include_tag "application"
     = javascript_include_tag 'swfobject'
+    = javascript_include_tag 'jqModal'
     =stylesheet_link_tag 'default'
+    %meta{ :name => "csrf-token", :content => form_authenticity_token }
+    %meta{ :name => "csrf-param", :content => "authenticity_token" }
   %body
     =yield
 
