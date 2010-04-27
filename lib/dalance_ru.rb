@@ -22,7 +22,7 @@ class DalanceRu
       args = {}
       args[:title] = convert((project_div/"a.job_title").first.inner_html)
       link = (project_div/"a.job_title").first
-      id = link.attributes['id'].to_i
+      id = link.attributes['id'].gsub(/[^\d]+/, '').to_i
       url = link.attributes['href']
 
       args[:remote_id] = id
