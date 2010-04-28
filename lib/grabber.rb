@@ -1,9 +1,8 @@
 require 'open-uri'
 require 'rubygems'
 require 'net/http'
-require 'sequel'
 require 'iconv'
-require 'yaml'
+require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
 require File.dirname(__FILE__) + '/../lib/free_lance_ru.rb'
 require File.dirname(__FILE__) + '/../lib/weblancer_ru.rb'
 require File.dirname(__FILE__) + '/../lib/freelance_ru.rb'
@@ -12,13 +11,12 @@ require File.dirname(__FILE__) + '/../lib/freelancejob_ru.rb'
 require File.dirname(__FILE__) + '/../lib/dalance_ru.rb'
 require File.dirname(__FILE__) + '/../lib/sources.rb'
 
-config = YAML::load_file( File.join( File.dirname(__FILE__), '../config/database.yml' ) )[ENV['RAILS_ENV'] || 'development']
-
-DB = Sequel.connect("postgres://#{config['username']}:#{config['password']}@#{config['host'] || 'localhost'}/#{config['database']}")
 ROOT = '/tmp/travel_grab'
 
 $projects_db = DB[:projects]
 $attachments_db = DB[:project_attachments]
+
+others_category = DB["select id from categories where title like 'Прочее'"].first[:id]
 
 def process(klass)
   project_datas = klass.latest
@@ -29,6 +27,7 @@ def process(klass)
     attachments = project_data[:attachments]
     project_data[:klass] = klass.name
     project_data.delete(:attachments)
+    project_data[:category_id] ||= others_category
     project_id = $projects_db.insert(project_data)
 
     if attachments.is_a?(Array)

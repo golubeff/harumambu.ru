@@ -19,7 +19,6 @@ textarea, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #
 #twitter { margin: 10px }
 a img { border: 0 }
 .project img { float: left; margin-right: 5px }
-#categories { position: fixed; bottom: 20px; right: 250px }
 #categories .child { margin-left:15px; font-size:12px }
 #categories .category { width: 50%; float: left; margin-bottom: 10px }
 

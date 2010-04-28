@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   default_scope :order => "id desc"
 
   has_many :attachments, :class_name => "ProjectAttachment"
+  belongs_to :category
   validates :klass, :presence => true
   validates :title, :presence => true
   validates :desc, :presence => true

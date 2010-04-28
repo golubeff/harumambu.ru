@@ -6,6 +6,7 @@
       'created_at' : '<%=l project.created_at %>',
       'url' : '<%= project.url %>',
       'klass' : '<%= project.klass %>',
-      'icon' : '<%= project.klass.underscore %>'
+      'icon' : '<%= project.klass.underscore %>',
+      'category' : '<%= project.category ? project.category.title : '' %>'
     }
 

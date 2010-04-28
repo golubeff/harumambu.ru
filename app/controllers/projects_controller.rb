@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
   def finder_options
     options = { 
       #:include => [ :attachments ]
+      #:include => :category
     }
 
     conditions = []
@@ -37,6 +38,11 @@ class ProjectsController < ApplicationController
     if params[:q] && params[:strict]
       conditions << 'title ilike ? or "desc" ilike ?'
       2.times { bindings << "%#{params[:q]}%" }
+    end
+
+    if session[:categories] && session[:categories].keys.size > 0
+      conditions << "category_id in (#{session[:categories].keys.map{'?'}.join(',')})"
+      session[:categories].keys.each { |k| bindings << k  }
     end
 
     unless conditions.empty?

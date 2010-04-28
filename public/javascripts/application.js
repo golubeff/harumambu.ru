@@ -55,7 +55,7 @@ function appendProject(json, after){
       html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
         '<img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<strong>' + project.budjet + '</strong>' +
-        '<h3><a href="' + project.url + '">' + project.title + '</a></h3>' +
+        '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a href="' + project.url + '">' + project.title + '</a></h3>' +
         '<p>' + project.desc + '</p>' +
         '<div class="created_at">' + project.created_at + '</div>' +
       '</div>';
