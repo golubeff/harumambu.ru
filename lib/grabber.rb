@@ -23,7 +23,7 @@ $attachments_db = DB[:project_attachments]
 def process(klass)
   project_datas = klass.latest
 
-  existing_project_ids = $projects_db.where(:remote_id => project_datas.map{|it| it[:remote_id] }).map(:remote_id)
+  existing_project_ids = $projects_db.where(:klass => klass.name, :remote_id => project_datas.map{|it| it[:remote_id] }).map(:remote_id)
 
   project_datas.select{|it| !existing_project_ids.include?(it[:remote_id]) }.each do |project_data|
     attachments = project_data[:attachments]
@@ -45,6 +45,7 @@ loop do
     begin
       process(klass)
     rescue Exception => e
+      puts e
     rescue Timeout::Error => e
     end
   end
