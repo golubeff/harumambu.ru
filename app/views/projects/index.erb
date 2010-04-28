@@ -30,11 +30,14 @@
   <% SOURCES.each do |source| %>
     <div><input type="checkbox" checked="checked" disabled="disabled" id="source_<%= source.name %>" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
   <% end %>
-  <div id="twitter"><a href="/twitter"><img src="/images/twitter.png" alt="" /></a></div>
+  <div id="twitter">
+    <a href="/twitter"><img src="/images/twitter.png" alt="" /></a><br/>
+    <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus();$(this).hide()">Связаться</a>
+  </div>
 
-  <div id="feedback">
+  <div id="feedback" class="invisible">
     <% form_tag :feedback, :remote => true  do |f| %>
-      <%= text_area_tag :feedback_message, @feedback.message, :onclick => "$(this).addClass('hover')"%><br/>
+      <%= text_area_tag :feedback_message, @feedback.message, :class => "hover"%><br/>
       <%= submit_tag 'Отправить' %>
     <% end %>
   </div>

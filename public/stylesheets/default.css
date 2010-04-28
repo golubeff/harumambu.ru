@@ -21,6 +21,7 @@ a img { border: 0 }
 .project img { float: left; margin-right: 5px }
 #categories .child { margin-left:15px; font-size:12px }
 #categories .category { width: 50%; float: left; margin-bottom: 10px }
+.invisible { display: none }
 
 
 /* jqModal base Styling courtesy of;
