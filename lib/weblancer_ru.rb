@@ -5,6 +5,10 @@ class WeblancerRu
     'weblancer.net'
   end
 
+  CATEGORIES = {
+    
+  }
+
   def self.latest
     doc = Hpricot(open('http://weblancer.net'))
     args = {}

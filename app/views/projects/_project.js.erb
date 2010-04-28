@@ -1,12 +1,12 @@
     { 
       'id' : <%= project.id %>, 
       'budjet' : '<%=raw project.budjet_with_currency %>', 
-      'title' : '<%=raw project.title %>', 
-      'desc' : '<%=raw(project.desc) %>',
+      'title' : '<%=raw project.title.escape_quotes %>', 
+      'desc' : '<%=raw project.desc.escape_quotes %>',
       'created_at' : '<%=l project.created_at %>',
       'url' : '<%= project.url %>',
       'klass' : '<%= project.klass %>',
       'icon' : '<%= project.klass.underscore %>',
-      'category' : '<%= project.category ? project.category.title : '' %>'
+      'category' : '<%= project.category ? project.category.title.escape_quotes : '' %>'
     }
 
