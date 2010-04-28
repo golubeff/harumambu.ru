@@ -6,6 +6,21 @@ class FreelanceRu
 
   def self.desc; 'freelance.ru'; end
 
+  CATEGORIES = {
+    'Дизайн и графика' => 'Дизайн',
+    "Дизайн и графика для WEB" => "Дизайн",
+    "Фирменный стиль (айдентика)" => "Дизайн",
+    "Интернет-маркетинг" => "Реклама/Маркетинг",
+    "Администрирование" => "Программирование",
+    "Аутсорсинг/Консалтинг" => "Консалтинг",
+    "Программирование" => "Программирование",
+    "Фото/Видео" => "Фотография",
+	  "Переводы" => "Переводы",
+    "Реклама/Маркетинг" => "Реклама/Маркетинг",
+    "Тексты" => "Тексты",
+    "Музыка/звук" => "Аудио/Видео"
+  }
+
   def self.latest
     doc = Hpricot(open('http://freelance.ru/'))
     args = {}
@@ -18,6 +33,13 @@ class FreelanceRu
       args[:desc] = convert((project_div/".descr").inner_html.to_s)
       stats = project_div.at(".project-stats")
       args[:created_at] = Time.now
+      category = convert((project_div/'li.spec_name').inner_html.to_s)
+      begin
+        if category && CATEGORIES[category]
+          args[:category_id] = DB["select id from categories where title ilike E'%#{CATEGORIES[category]}%'"].first[:id]
+        end
+      rescue
+      end
       budjet = convert((project_div/'li.cost').inner_html.to_s)
       if budjet
         val = budjet.gsub(/[^\d]+/, '').to_f 
