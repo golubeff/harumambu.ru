@@ -45,13 +45,16 @@ class ProjectsController < ApplicationController
       session[:categories].keys.each { |k| bindings << k  }
     end
 
+    if session[:sources] && session[:sources].keys.size > 0
+      conditions << "klass in (#{session[:sources].keys.map{'?'}.join(',')})"
+      session[:sources].keys.each { |k| bindings << k }
+    end
+
     unless conditions.empty?
       options[:conditions] = [ '(' + conditions.join(') AND (') + ')' ]
       options[:conditions] << bindings
       options[:conditions].flatten!
     end
-
-    p options
 
     options
   end

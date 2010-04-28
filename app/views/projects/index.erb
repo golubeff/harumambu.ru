@@ -27,9 +27,14 @@
 </div>
 <div id="sources">
   <a href="#" class="jqModal">Выбрать категории</a><br/><br/>
-  <% SOURCES.each do |source| %>
-    <div><input type="checkbox" checked="checked" disabled="disabled" id="source_<%= source.name %>" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
-  <% end %>
+  <form method="post" action="/sources">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+    <input type="hidden" name="redirect_to" value="<%= request.fullpath %>">
+    <% SOURCES.each do |source| %>
+      <div><input type="checkbox" <%= want_source?(source.name) ? 'checked="checked"' : '' %> id="source_<%= source.name %>" name="sources[<%= source.name %>]" value="1" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
+    <% end %>
+    <br/><input type="submit" value="Применить" />
+  </form>
   <div id="twitter">
     <a href="/twitter"><img src="/images/twitter.png" alt="" /></a><br/>
     <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus();$(this).hide()">Связаться</a>

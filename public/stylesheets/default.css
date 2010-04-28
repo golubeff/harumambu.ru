@@ -16,6 +16,7 @@ textarea, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #
 #controls { margin-bottom: 10px }
 #stop_words { width: 300px }
 #sources { position: fixed; right: 30px; bottom: 0px }
+input[type="button"], input[type="submit"] { font-size: 14px }
 #twitter { margin: 10px }
 a img { border: 0 }
 .project img { float: left; margin-right: 5px }

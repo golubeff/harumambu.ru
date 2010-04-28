@@ -16,7 +16,7 @@ ROOT = '/tmp/travel_grab'
 $projects_db = DB[:projects]
 $attachments_db = DB[:project_attachments]
 
-others_category = DB["select id from categories where title like 'Прочее'"].first[:id]
+$others_category = DB["select id from categories where title like 'Прочее'"].first[:id]
 
 def process(klass)
   project_datas = klass.latest
@@ -27,7 +27,7 @@ def process(klass)
     attachments = project_data[:attachments]
     project_data[:klass] = klass.name
     project_data.delete(:attachments)
-    project_data[:category_id] ||= others_category
+    project_data[:category_id] ||= $others_category
     project_id = $projects_db.insert(project_data)
 
     if attachments.is_a?(Array)

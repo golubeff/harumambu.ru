@@ -34,7 +34,7 @@ $(document).ready(function(){
 
 function appendProject(json, after){
   $(json).each( function(i, project) {
-    if(!after || $('#source_' + project.klass + ':checked').length > 0){
+      /*if(!after || $('#source_' + project.klass + ':checked').length > 0){*/
       var r = 150 + Math.floor(Math.random() * 100);
       var g = 150 + Math.floor(Math.random() * 100)
       var b = 150 + Math.floor(Math.random() * 100);
@@ -68,9 +68,9 @@ function appendProject(json, after){
         document.title = '➘ ' + (project.budjet.match(/[^ ]/) ? project.budjet + " — " : "") + project.title.replace(/<.+?>/g, ' ');
         $('.project:first').before(html);
       }
-    }else{
-      window.console.log('skip: ' + project.klass);
-    }
+      /*}else{*/
+      /*window.console.log('skip: ' + project.klass);*/
+      /*}*/
   } );
 }
 
