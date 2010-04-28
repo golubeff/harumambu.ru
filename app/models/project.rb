@@ -8,7 +8,12 @@ class Project < ActiveRecord::Base
   validates :desc, :presence => true
 
   def budjet_with_currency
-    self.currency == '$' ? "#{self.currency}#{self.budjet}" : "#{self.budjet} #{self.currency}"
+    retval = ""
+    retval = self.currency == '$' ? "#{self.currency}#{self.budjet}" : "#{self.budjet} #{self.currency}"
+    if self.currency == 'руб.' 
+      retval = "#{retval} ≈ $#{(self.budjet / 30.0).round}"
+    end
+    retval
   end
 
   def budjet
