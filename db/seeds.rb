@@ -95,7 +95,7 @@
   'Реклама/Маркетинг',
   'Разработка игр',
   'Архитектура/Инжиниринг',
-  'Консалтинг'
+  'Консалтинг', "Прочее"
 ].each do |category|
   Category.find_by_title(category) || Category.create!(:title => category)
 end
