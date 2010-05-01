@@ -15,7 +15,6 @@
     <a href="javascript:;" onclick="$('div.category').children('input').each(function(i, elem){elem.checked=true})" style="margin-right: 10px">Все</a>
     <a href="javascript:;" onclick="$('div.category').children('input').each(function(i, elem){elem.checked=false})">Ни одной</a>
     <div style="clear: both; margin-top: 15px"></div>
-    <p><strong>Примечание:</strong> <em>Категории пока работают только для проектов с free-lance.ru, остальное попадает в категорию &laquo;Прочее&raquo;. Это будет исправлено в ближайшие дни.</em></p>
     <% Category.top.each do |category| %>
       <div class="category">
         <input type="checkbox" value="1" name="categories[<%= category.id %>]" <%= want_category?(category.id) ? 'checked="checked"' : '' %> id="category_<%= category.id %>" /> <label for="category_<%= category.id %>"><%= category.title %></label>
