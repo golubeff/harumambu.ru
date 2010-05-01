@@ -28,7 +28,7 @@ class FreeLanceRu
       #puts "counter: #{counter.inspect}"
       next if counter > 0
 
-      puts "#{args[:title]} #{args[:remote_id]}"
+      #puts "#{args[:title]} #{args[:remote_id]}"
       args[:url] = "http://free-lance.ru/projects/?pid=#{args[:remote_id]}"
 
       inner_doc = convert(open(args[:url]).read)

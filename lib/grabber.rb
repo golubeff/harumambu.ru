@@ -41,6 +41,7 @@ end
 
 loop do
   SOURCES.each do |klass|
+    #puts klass
     begin
       process(klass)
     rescue Exception => e
