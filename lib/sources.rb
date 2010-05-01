@@ -1,1 +1,2 @@
-SOURCES = [ FreeLanceRu, WeblancerRu, FreelanceRu, FreeLancersNet, FreelancejobRu, DalanceRu ]
+SOURCES = [ FreeLanceRu, WeblancerRu, FreelanceRu, FreeLancersNet, FreelancejobRu, DalanceRu, 
+  NetlancerRu ]
