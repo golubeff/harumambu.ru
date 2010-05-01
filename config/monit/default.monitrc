@@ -18,8 +18,8 @@ set httpd port 6666
 
 check process grabber with pidfile /home/hara/production/current/tmp/pids/grabber.rb.pid
 
-    start program = "/home/hara/production/current/script/startd production 'grabber start'"
-    stop program  = "/home/hara/production/current/script/startd production 'grabber stop'"
+    start program = "/home/hara/production/current/script/startd production 'grabber.rb start'"
+    stop program  = "/home/hara/production/current/script/startd production 'grabber.rb stop'"
  
     group daemons
     if totalmem > 600.0 MB for 5 cycles then restart
