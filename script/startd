@@ -1,0 +1,53 @@
+#!/bin/bash
+
+export HOME=/home/hara
+CURRENT=/home/hara/production/current/script
+
+rvm_scripts_path=/home/hara/.rvm/scripts
+rvm_bin_path=/home/hara/.rvm/bin
+GEM_HOME=/home/hara/.rvm/gems/ruby-1.9.1-p378
+TERM=xterm-color
+SHELL=/bin/bash
+IRBRC=/home/hara/.rvm/rubies/ruby-1.9.1-p378/.irbrc
+SSH_CLIENT=89.232.105.56 63283 22
+MY_RUBY_HOME=/home/hara/.rvm/rubies/ruby-1.9.1-p378
+SSH_TTY=/dev/pts/6
+USER=hara
+rvm_gems_cache_path=/home/hara/.rvm/gems/cache
+rvm_config_path=/home/hara/.rvm/config
+rvm_path=/home/hara/.rvm
+rvm_gemset_separator=@
+MAIL=/var/mail/hara
+PATH=/home/hara/.rvm/rubies/ruby-1.9.1-p378/bin:/home/hara/.rvm/gems/ruby-1.9.1-p378/bin:/home/hara/.rvm/gems/ruby-1.9.1-p378@global/bin:/home/hara/.rvm/bin:/home/hara/.rvm/rubies/ruby-1.9.1-p378/bin:/home/hara/.rvm/gems/ruby-1.9.1-p378/bin:/home/hara/.rvm/gems/ruby-1.9.1-p378@global/bin:/home/hara/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+rvm_rubies_path=/home/hara/.rvm/rubies
+PWD=/home/hara/production/current
+LANG=ru_RU.UTF-8
+rvm_hooks_path=/home/hara/.rvm/hooks
+rvm_version=0.1.28
+rvm_src_path=/home/hara/.rvm/src
+SHLVL=1
+HOME=/home/hara
+rvm_gems_path=/home/hara/.rvm/gems
+RAILS_ENV=production
+rvm_ruby_string=ruby-1.9.1-p378
+BUNDLE_PATH=/home/hara/.rvm/gems/ruby-1.9.1-p378
+rvm_tmp_path=/home/hara/.rvm/tmp
+LOGNAME=hara
+GEM_PATH=/home/hara/.rvm/gems/ruby-1.9.1-p378:/home/hara/.rvm/gems/ruby-1.9.1-p378@global
+SSH_CONNECTION=89.232.105.56 63283 89.108.72.56 22
+rvm_log_path=/home/hara/.rvm/log
+RUBYOPT=-Ku
+RUBY_VERSION=ruby 1.9.1p378
+rvm_archives_path=/home/hara/.rvm/archives
+_=/usr/bin/env
+OLDPWD=/home/hara/productio
+
+
+if [ $# != 2 ]; then
+  echo "Usage: startd RAILS_ENV 'daemon start|stop'"
+  exit
+fi
+
+# starting script
+#sleep 15 # ждем, потому что скрирт уже может быть запущен, но пид еще не создался
+RAILS_ENV=$1 $CURRENT/$2

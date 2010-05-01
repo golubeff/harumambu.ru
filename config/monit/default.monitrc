@@ -1,0 +1,25 @@
+set daemon 10
+#set mailserver smtp.gmail.com username 'monit@play-me.ru' password '6786X5' using TLSV1
+set mail-format { 
+  from: monit@harumambu.ru
+  subject: [Monit] $DESCRIPTION
+  message: Service=$SERVICE
+Action=$ACTION
+Event=$EVENT 
+Fired at $DATE on $HOST 
+
+Всегда ваш, Monit
+}
+set alert pavel@golubeff.ru
+set logfile syslog
+
+set httpd port 6666
+    allow admin:qweasd1785
+
+check process grabber with pidfile /home/hara/production/current/tmp/pids/grabber.rb.pid
+
+    start program = "/home/hara/production/current/script/startd production 'grabber start'"
+    stop program  = "/home/hara/production/current/script/startd production 'grabber stop'"
+ 
+    group daemons
+    if totalmem > 600.0 MB for 5 cycles then restart
