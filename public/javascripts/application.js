@@ -57,6 +57,7 @@ function appendProject(json, after){
         '<strong>' + project.budjet + '</strong>' +
         '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a href="' + project.url + '">' + project.title + '</a></h3>' +
         '<p>' + project.desc + '</p>' +
+        '<a class="up" href="javascript:;" onclick="window.scroll(0,0)">↑</a>' +
         '<div class="created_at">' + project.created_at + '</div>' +
       '</div>';
 

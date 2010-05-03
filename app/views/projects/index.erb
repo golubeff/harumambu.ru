@@ -6,7 +6,11 @@
   </form>
 </div>
 <div id="projects"></div>
-<div id="notifier"><a href="javascript:;" onclick="window.scroll(0, 0)">↑</a></div>
+<div id="notifier">
+  <strong>Харумамбу.ру</strong>
+  <p>Мы первыми собираем все фриланс-проекты интернета.</p>
+  <p>Если вам не хватает каких-то функций на сайте, <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus()">напишите нам</a>.</p>
+</div>
 <div id="loader"></div>
 <div id="categories" class="jqmWindow">
   <form method="post" action="/categories">
@@ -36,13 +40,14 @@
   </form>
   <div id="twitter">
     <a href="/twitter"><img src="/images/twitter.png" alt="" /></a><br/>
-    <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus();$(this).hide()">Связаться</a>
+    <a id="contacts_lnk" href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus();$(this).hide()">Связаться</a>
   </div>
 
   <div id="feedback" class="invisible">
     <% form_tag :feedback, :remote => true  do |f| %>
       <%= text_area_tag :feedback_message, @feedback.message, :class => "hover"%><br/>
       <%= submit_tag 'Отправить' %>
+      <input type="button" value="Отменить" onclick="$('#feedback').addClass('invisible');$('#contacts_lnk').show()">
     <% end %>
   </div>
 
