@@ -3,13 +3,6 @@ require 'rubygems'
 require 'net/http'
 require 'iconv'
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
-require File.dirname(__FILE__) + '/../lib/free_lance_ru.rb'
-require File.dirname(__FILE__) + '/../lib/weblancer_ru.rb'
-require File.dirname(__FILE__) + '/../lib/freelance_ru.rb'
-require File.dirname(__FILE__) + '/../lib/free_lancers_net.rb'
-require File.dirname(__FILE__) + '/../lib/freelancejob_ru.rb'
-require File.dirname(__FILE__) + '/../lib/dalance_ru.rb'
-require File.dirname(__FILE__) + '/../lib/netlancer_ru.rb'
 require File.dirname(__FILE__) + '/../lib/sources.rb'
 
 ROOT = '/tmp/travel_grab'
@@ -22,7 +15,6 @@ $others_category = DB["select id from categories where title like 'Прочее'
 def process(klass)
   project_datas = klass.latest
 
-  p project_datas
   existing_project_ids = $projects_db.where(:klass => klass.name, :remote_id => project_datas.map{|it| it[:remote_id] }).map(:remote_id)
 
   project_datas.select{|it| !existing_project_ids.include?(it[:remote_id]) }.each do |project_data|

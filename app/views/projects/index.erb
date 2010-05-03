@@ -29,8 +29,8 @@
   <form method="post" action="/sources">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
     <input type="hidden" name="redirect_to" value="<%= request.fullpath %>">
-    <% SOURCES.each do |source| %>
-      <div><input type="checkbox" <%= want_source?(source.name) ? 'checked="checked"' : '' %> id="source_<%= source.name %>" name="sources[<%= source.name %>]" value="1" /> <label for="source_<%=source.name%>"><%= source.desc %></label></div>
+    <% SOURCES.sort{|a,b| a.desc <=> b.desc}.each do |source| %>
+      <div><input type="checkbox" <%= want_source?(source.name) ? 'checked="checked"' : '' %> id="source_<%= source.name %>" name="sources[<%= source.name %>]" value="1" /> <label for="source_<%=source.name%>"><img src="/images/icons/<%= source.name.underscore %>.gif" align="absmiddle" /> <%= source.desc %></label></div>
     <% end %>
     <br/><input type="submit" value="Применить" />
   </form>
