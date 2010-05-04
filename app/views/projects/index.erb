@@ -1,13 +1,27 @@
+<script type="text/javascript">
+  window.first_id = <%= session[:first_id].to_i %>;
+</script>
 <div id="flashbanner"></div>
 <div id="controls">
   <form method="get" action="/">
-    Выделить проекты, содержащие: <input name="q" id="stop_words" value="<%= params[:q] %>" />
-    <input type="checkbox" <%= 'checked="checked"' if params[:strict] %> id="strict" name="strict" value="1" /> <label for="strict">строгий поиск</label>
+    <select name="strict" id="strict">
+      <option value="1">Найти</option>
+      <option value="0" <%= 'selected="selected"' if params[:strict] && params[:strict].to_i == 0 %>>Выделять</option>
+    </select> проекты, содержащие <input name="q" id="stop_words" value="<%= params[:q] %>" />
   </form>
 </div>
-<div id="projects"></div>
+<div id="projects">
+  <%= will_paginate @projects %>
+  <% @projects.reverse.each do |project| %>
+    <div class="project" id="<%= project.id %>">
+      <h3><%=raw ( project.category != '' ? (project.category.title + ', ') : '' ) %><a href="<%= project.url %>"><%=raw project.title %></a></h3>
+      <p>Фриланс-проект: <%=raw project.desc %></p>
+    </div>
+  <% end %>
+  <%= will_paginate @projects %>
+</div>
 <div id="notifier">
-  <strong>Харумамбу.ру</strong>
+  <strong><a href="/">Харумамбу.ру</a></strong>
   <p>Мы первыми собираем все фриланс-проекты интернета.</p>
   <p>Если вам не хватает каких-то функций на сайте, <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus()">напишите нам</a>.</p>
 </div>
@@ -34,13 +48,14 @@
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
     <input type="hidden" name="redirect_to" value="<%= request.fullpath %>">
     <% SOURCES.sort{|a,b| a.desc <=> b.desc}.each do |source| %>
-      <div><input type="checkbox" <%= want_source?(source.name) ? 'checked="checked"' : '' %> id="source_<%= source.name %>" name="sources[<%= source.name %>]" value="1" /> <label for="source_<%=source.name%>"><img src="/images/icons/<%= source.name.underscore %>.gif" align="absmiddle" /> <%= source.desc %></label></div>
+      <div><input class="source" type="checkbox" <%= want_source?(source.name) ? 'checked="checked"' : '' %> id="source_<%= source.name %>" name="sources[<%= source.name %>]" value="1" /> <label for="source_<%=source.name%>"><img src="/images/icons/<%= source.name.underscore %>.gif" align="absmiddle" /> <%= source.desc %></label></div>
     <% end %>
+    <br/><a href="javascript:;" onclick="$('input.source').each(function(e, elem){elem.checked=true})">Все</a> 
+    <a onclick="$('input.source').each(function(e, elem){elem.checked=false})" href="javascript:;">Ни одного</a><br/>
     <br/><input type="submit" value="Применить" />
   </form>
   <div id="twitter">
-    <a href="/twitter"><img src="/images/twitter.png" alt="" /></a><br/>
-    <a id="contacts_lnk" href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus();$(this).hide()">Связаться</a>
+    <a href="/twitter"><img src="/images/twitter.jpg" alt="" align="absmiddle" /></a>
   </div>
 
   <div id="feedback" class="invisible">
@@ -55,6 +70,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+    $('#projects').html('');
     <% @projects.each do |project| %>
       appendProject(<%= render :partial => "projects/project.js", :object => project %>);
     <% end %>

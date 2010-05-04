@@ -33,9 +33,10 @@ class ProjectsController < ApplicationController
     if params[:first_id].to_i > 0
       conditions << "projects.id > ?"
       bindings << params[:first_id]
+      session[:first_id] = params[:first_id]
     end
 
-    if params[:q] && params[:strict]
+    if params[:q] && params[:strict].to_i > 0
       conditions << 'title ilike ? or "desc" ilike ?'
       2.times { bindings << "%#{params[:q]}%" }
     end

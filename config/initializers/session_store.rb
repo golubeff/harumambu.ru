@@ -2,6 +2,7 @@
 
 Rails.application.config.session_store :cookie_store, {
   :key => '_freelance_session',
+  :expire_after => 10.years
 }
 
 # Use the database for sessions instead of the cookie-based default,

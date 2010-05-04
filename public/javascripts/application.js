@@ -8,7 +8,7 @@ $(document).ready(function(){
 
       window.setTimeout( function(){
         var url = '/projects.js?last_id=' + $('.project:last').attr('id');
-        if( $('#strict:checked').val() ) { url += '&strict=1&q=' + $('#stop_words').val() }
+        if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
         $.get(url,
         function(data){
           if (data != "") {
@@ -22,7 +22,7 @@ $(document).ready(function(){
 
   setInterval( function(){
     var url = '/projects.js?first_id=' + $('.project:first').attr('id');
-    if( $('#strict:checked').val() ) { url += '&strict=1&q=' + $('#stop_words').val() }
+    if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
     $.ajax({
       'url': url, 
       'success': function(data){
@@ -39,7 +39,7 @@ function appendProject(json, after){
       var g = 150 + Math.floor(Math.random() * 100)
       var b = 150 + Math.floor(Math.random() * 100);
 
-      var strict = $('#strict:checked').val();
+      var strict = document.location.href.match(/strict=1/);
       var matches = false;
       if (!strict){
         var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
@@ -52,7 +52,7 @@ function appendProject(json, after){
         if (matches) { sound() }
       }
 
-      html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
+      html = '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project ' + ' '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
         '<img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<strong>' + project.budjet + '</strong>' +
         '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a href="' + project.url + '">' + project.title + '</a></h3>' +
