@@ -32,7 +32,32 @@ $(document).ready(function(){
   }, 5000 );
 });
 
+function updateActivity(){
+  window.activity_at = new Date;
+}
+
+$(document).keydown(updateActivity);
+$(document).keyup(updateActivity);
+$(document).mouseover(updateActivity);
+$(document).mousemove(updateActivity);
+$(window).load(updateActivity);
+
+function inactivityTime() { return (new Date - (isNaN(window.activity_at) ? 0 : window.activity_at)) / 1000; }
+
+function removeProjects(amount){
+  var projects = $('.project');
+  if (projects.length > amount){
+    for(var i=amount;i<projects.length;i++){
+      $(projects[i]).remove();
+    }
+  }
+}
+
 function appendProject(json, after){
+  if(!after&&inactivityTime() > 60*5){
+    removeProjects( 3 );
+  }
+
   $(json).each( function(i, project) {
       /*if(!after || $('#source_' + project.klass + ':checked').length > 0){*/
       var r = 150 + Math.floor(Math.random() * 100);
