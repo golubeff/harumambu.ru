@@ -32,7 +32,7 @@ class VingradRu
       end
       begin
         budjet = convert(project[0].scan(/class="project_budjet">(.+?)</m)[0][0]).scan(/Бюджет: (.+)/)[0][0]
-        args[:budjet] = budjet.gsub(/[^\d ]/, '')
+        args[:budjet] = budjet.gsub(/[^\d]/, '')
         args[:currency] = budjet.gsub(/[\d ]/, '')
       rescue Exception => e
       end

@@ -1,5 +1,6 @@
 
 SOURCES = [ 
+  FreeLancingRu,
   VingradRu,
   FreeLanceRu,
   WeblancerRu,
