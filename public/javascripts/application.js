@@ -55,7 +55,7 @@ function removeProjects(amount){
 
 function appendProject(json, after){
   if(!after&&inactivityTime() > 60*5){
-    removeProjects( 3 );
+    removeProjects( 100 );
   }
 
   $(json).each( function(i, project) {
