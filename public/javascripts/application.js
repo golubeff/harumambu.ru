@@ -8,7 +8,7 @@ $(document).ready(function(){
 
       window.setTimeout( function(){
         var url = '/projects.js?last_id=' + $('.project:last').attr('id');
-        if( $('#strict:checked').val() ) { url += '&strict=1&q=' + $('#stop_words').val() }
+        if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
         $.get(url,
         function(data){
           if (data != "") {
@@ -22,7 +22,7 @@ $(document).ready(function(){
 
   setInterval( function(){
     var url = '/projects.js?first_id=' + $('.project:first').attr('id');
-    if( $('#strict:checked').val() ) { url += '&strict=1&q=' + $('#stop_words').val() }
+    if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
     $.ajax({
       'url': url, 
       'success': function(data){
@@ -32,14 +32,39 @@ $(document).ready(function(){
   }, 5000 );
 });
 
+function updateActivity(){
+  window.activity_at = new Date;
+}
+
+$(document).keydown(updateActivity);
+$(document).keyup(updateActivity);
+$(document).mouseover(updateActivity);
+$(document).mousemove(updateActivity);
+$(window).load(updateActivity);
+
+function inactivityTime() { return (new Date - (isNaN(window.activity_at) ? 0 : window.activity_at)) / 1000; }
+
+function removeProjects(amount){
+  var projects = $('.project');
+  if (projects.length > amount){
+    for(var i=amount;i<projects.length;i++){
+      $(projects[i]).remove();
+    }
+  }
+}
+
 function appendProject(json, after){
+  if(!after&&inactivityTime() > 60*5){
+    removeProjects( 100 );
+  }
+
   $(json).each( function(i, project) {
       /*if(!after || $('#source_' + project.klass + ':checked').length > 0){*/
       var r = 150 + Math.floor(Math.random() * 100);
       var g = 150 + Math.floor(Math.random() * 100)
       var b = 150 + Math.floor(Math.random() * 100);
 
-      var strict = $('#strict:checked').val();
+      var strict = document.location.href.match(/strict=1/);
       var matches = false;
       if (!strict){
         var stop_words = $('#stop_words').val().replace(/,/g, ' ').replace(/ё/, 'е').split(/ +/);
@@ -52,7 +77,7 @@ function appendProject(json, after){
         if (matches) { sound() }
       }
 
-      html = '<div style="background: rgb('+r+','+g+','+b+')" class="project '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
+      html = '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project ' + ' '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
         '<img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<strong>' + project.budjet + '</strong>' +
         '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a href="' + project.url + '">' + project.title + '</a></h3>' +
