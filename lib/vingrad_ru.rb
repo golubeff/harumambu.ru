@@ -28,7 +28,7 @@ class VingradRu
       begin
         args[:category_id] = DB["select id from categories where title ilike E'%#{category}%'"].first[:id]
       rescue Exception => e
-        puts e
+        puts "#{e} (safe to ignore)"
       end
       begin
         budjet = convert(project[0].scan(/class="project_budjet">(.+?)</m)[0][0]).scan(/Бюджет: (.+)/)[0][0]
