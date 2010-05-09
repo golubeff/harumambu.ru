@@ -6,8 +6,8 @@ class ProjectsController < ApplicationController
     @projects.reverse! unless params[:last_id]
 
     respond_to do |format|
-      format.js { render :layout => false }
       format.html
+      format.js { render :layout => false }
     end
   end
 
