@@ -48,7 +48,9 @@ end
 loop do
   SOURCES.each do |klass|
     begin
-      process(klass)
+      timeout(30) do
+        process(klass)
+      end
     rescue Exception => e
       puts "#{e} #{e.backtrace}"
     rescue Timeout::Error => e
