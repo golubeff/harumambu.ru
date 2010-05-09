@@ -121,7 +121,7 @@ class AculaOrg
       args[:remote_id] = args[:url].gsub(/[^\d]/, '')
       desc = convert((project_div/:description).inner_html)
       desc2 =  desc.sub(/^(.+?)\n/i,"")
-      args[:desc] = desc2.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/\&\#xD\;/i,"")
+      args[:desc] = desc2.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/\&\#xD\;/i,"").gsub(/http:\/\/www\.acula\.org\/go\/\?/,'/a.php?')
       
       budjet = desc.match(/Максимальный бюджет\&lt\;\/strong\&gt\;\: (\d+) (EUR|USD|RUB)/i)[1]
       currency = desc.match(/Максимальный бюджет\&lt\;\/strong\&gt\;\: (\d+) (EUR|USD|RUB)/i)[2]
