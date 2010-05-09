@@ -9,5 +9,6 @@ SOURCES = [
   FreelancejobRu,
   DalanceRu,
   NetlancerRu,
-  BestLanceRu
+  BestLanceRu,
+  AculaOrgRu
 ]
