@@ -5,7 +5,7 @@ require 'open-uri'
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
 
 
-class AculaOrgRu
+class AculaOrg
   
   CATEGORIES = {
   "Business Consulting" => 'Консалтинг',
@@ -121,8 +121,7 @@ class AculaOrgRu
       args[:remote_id] = args[:url].gsub(/[^\d]/, '')
       desc = convert((project_div/:description).inner_html)
       desc2 =  desc.sub(/^(.+?)\n/i,"")
-      args[:desc] = desc2.gsub(/&lt;([^&gt;]+)&gt;/i,"").gsub(/&lt;\/([^&gt;]+)&gt;/i,"").gsub(/\&\#xD\;/i,"")
-      #args[:desc] = desc2.gsub(/<([^>]+)>/i,"").gsub(/<\/([^>]+)>/i,"").gsub(/\&\#xD\;/i,"")
+      args[:desc] = desc2.gsub(/&lt;/, '<').gsub(/&gt;/, '>').gsub(/\&\#xD\;/i,"")
       
       budjet = desc.match(/Максимальный бюджет\&lt\;\/strong\&gt\;\: (\d+) (EUR|USD|RUB)/i)[1]
       currency = desc.match(/Максимальный бюджет\&lt\;\/strong\&gt\;\: (\d+) (EUR|USD|RUB)/i)[2]
