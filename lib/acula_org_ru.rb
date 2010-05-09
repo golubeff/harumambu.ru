@@ -5,7 +5,7 @@ require 'open-uri'
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
 
 
-class AculaOrg
+class AculaOrgRu
   
   CATEGORIES = {
   "Business Consulting" => 'Консалтинг',

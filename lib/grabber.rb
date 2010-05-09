@@ -12,6 +12,7 @@ require File.dirname(__FILE__) + "/../lib/netlancer_ru.rb"
 require File.dirname(__FILE__) + "/../lib/best_lance_ru.rb"
 require File.dirname(__FILE__) + "/../lib/vingrad_ru.rb"
 require File.dirname(__FILE__) + "/../lib/free_lancing_ru.rb"
+require File.dirname(__FILE__) + "/../lib/acula_org_ru.rb"
 
 
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
@@ -38,7 +39,7 @@ def process(klass)
 
     if attachments.is_a?(Array)
       attachments.each do |attachment|
-        id = $attachments_db.insert(attachment.update(:project_id => project_id))
+        id = $attachments_db.insert(attachment.updatete(:project_id => project_id))
       end
     end
   end
