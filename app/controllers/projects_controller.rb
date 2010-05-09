@@ -38,10 +38,12 @@ class ProjectsController < ApplicationController
 
     if params[:q] && params[:strict].to_i > 0
       queries = params[:q].gsub(/,/, ' ').split(/ +/)
-      conditions << '(' + queries.map do |query| 
-        bindings << "%#{query}%"
-        "title ilike ?"
-      end.join(') OR (') + ')'
+      unless queries.empty?
+        conditions << '(' + queries.map do |query| 
+          bindings << "%#{query}%"
+          "title ilike ?"
+        end.join(') OR (') + ')'
+      end
     end
 
     if session[:categories] && session[:categories].keys.size > 0
