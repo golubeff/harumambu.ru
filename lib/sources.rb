@@ -10,5 +10,5 @@ SOURCES = [
   DalanceRu,
   NetlancerRu,
   BestLanceRu,
-  AculaOrgRu
+  AculaOrg
 ]
