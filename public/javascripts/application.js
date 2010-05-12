@@ -21,6 +21,7 @@ $(document).ready(function(){
   });
 
   setInterval( function(){
+    if($('#pause:checked').val()){return false}
     var url = '/projects.js?first_id=' + $('.project:first').attr('id');
     if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
     $.ajax({
@@ -41,6 +42,14 @@ $(document).keyup(updateActivity);
 $(document).mouseover(updateActivity);
 $(document).mousemove(updateActivity);
 $(window).load(updateActivity);
+$(document).keydown(handlePause);
+
+function handlePause(e){
+  if(e.keyCode == 32){
+    $('#pause').click();
+    return false;
+  }
+}
 
 function inactivityTime() { return (new Date - (isNaN(window.activity_at) ? 0 : window.activity_at)) / 1000; }
 
@@ -56,6 +65,7 @@ function removeProjects(amount){
 function appendProject(json, after){
   if(!after&&inactivityTime() > 60*5){
     removeProjects( 100 );
+    if(!$('#pause:checked').val()){$('#pause').click()}
   }
 
   $(json).each( function(i, project) {
