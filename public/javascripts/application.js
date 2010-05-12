@@ -80,7 +80,7 @@ function appendProject(json, after){
       html = '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project ' + ' '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
         '<img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<strong>' + project.budjet + '</strong>' +
-        '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a href="' + project.url + '">' + project.title + '</a></h3>' +
+        '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a onclick="if($(\'#new_window:checked\').val()){window.open($(this).attr(\'href\'));return false;}else{return true}" href="' + project.url + '">' + project.title + '</a></h3>' +
         '<p>' + project.desc + '</p>' +
         '<a class="up" href="javascript:;" onclick="window.scroll(0,0)">↑</a>' +
         '<div class="created_at">' + project.created_at + '</div>' +

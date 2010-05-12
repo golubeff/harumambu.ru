@@ -9,6 +9,7 @@
       <option value="0" <%= 'selected="selected"' if params[:strict] && params[:strict].to_i == 0 %>>Выделять</option>
     </select> проекты, содержащие <input name="q" id="stop_words" value="<%= params[:q] %>" />
   </form>
+  <input type="checkbox" <% 'checked="checked"' if session[:new_window] %> onclick="$.post('/settings', { 'key' : 'new_window', 'value' : this.checked ? 1 : '' })" id="new_window" /> <label for="new_window">открыть ссылки в новом окне</label><br/>
 </div>
 <div id="projects">
   <%= will_paginate @projects %>
