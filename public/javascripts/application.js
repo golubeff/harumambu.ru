@@ -45,10 +45,10 @@ $(window).load(updateActivity);
 $(document).keydown(handlePause);
 
 function handlePause(e){
-  if(e.keyCode == 32){
-    $('#pause').click();
-    return false;
-  }
+  /*if(e.keyCode == 32){*/
+  /*$('#pause').click();*/
+  /*return false;*/
+  /*}*/
 }
 
 function inactivityTime() { return (new Date - (isNaN(window.activity_at) ? 0 : window.activity_at)) / 1000; }
