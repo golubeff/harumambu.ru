@@ -11,5 +11,6 @@ SOURCES = [
   NetlancerRu,
   BestLanceRu,
   AculaOrg,
-  FreelanceTomskRu
+  FreelanceTomskRu,
+  FreelancehuntCom
 ]
