@@ -55,6 +55,7 @@ Freelance::Application.routes.draw do |map|
   match "a.php", :to => "application#redirect"
   resources :categories
   resources :sources
+  match "settings", :to => "application#settings"
 
   # See how all your routes lay out with "rake routes"
 

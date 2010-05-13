@@ -21,6 +21,7 @@ $(document).ready(function(){
   });
 
   setInterval( function(){
+    if($('#pause:checked').val()){return false}
     var url = '/projects.js?first_id=' + $('.project:first').attr('id');
     if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
     $.ajax({
@@ -41,6 +42,14 @@ $(document).keyup(updateActivity);
 $(document).mouseover(updateActivity);
 $(document).mousemove(updateActivity);
 $(window).load(updateActivity);
+$(document).keydown(handlePause);
+
+function handlePause(e){
+  /*if(e.keyCode == 32){*/
+  /*$('#pause').click();*/
+  /*return false;*/
+  /*}*/
+}
 
 function inactivityTime() { return (new Date - (isNaN(window.activity_at) ? 0 : window.activity_at)) / 1000; }
 
@@ -54,8 +63,9 @@ function removeProjects(amount){
 }
 
 function appendProject(json, after){
-  if(!after&&inactivityTime() > 60*5){
+  if(!after&&inactivityTime() > 60*5&&inactivityTime() < 60 * 1000){
     removeProjects( 100 );
+    if(!$('#pause:checked').val()){$('#pause').click()}
   }
 
   $(json).each( function(i, project) {
@@ -80,7 +90,7 @@ function appendProject(json, after){
       html = '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project ' + ' '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
         '<img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<strong>' + project.budjet + '</strong>' +
-        '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a href="' + project.url + '">' + project.title + '</a></h3>' +
+        '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a onclick="if($(\'#new_window:checked\').val()){window.open($(this).attr(\'href\'));return false;}else{return true}" href="' + project.url + '">' + project.title + '</a></h3>' +
         '<p>' + project.desc + '</p>' +
         '<a class="up" href="javascript:;" onclick="window.scroll(0,0)">↑</a>' +
         '<div class="created_at">' + project.created_at + '</div>' +
