@@ -65,7 +65,7 @@ function removeProjects(amount){
 function appendProject(json, after){
   if(!after&&inactivityTime() > 60*5&&inactivityTime() < 60 * 1000){
     removeProjects( 100 );
-    if(!$('#pause:checked').val()){$('#pause').click()}
+    /*if(!$('#pause:checked').val()){$('#pause').click()}*/
   }
 
   $(json).each( function(i, project) {
