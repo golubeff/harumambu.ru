@@ -1,5 +1,5 @@
 set :application, "hara"
-set :repository,  "hara@alisa.play-me.ru:/home/hara/hara.git"
+set :repository,  "git@github.com:golubeff/harumambu.ru.git"
 
 set :deploy_to, "/home/hara/production"
 
@@ -8,9 +8,9 @@ set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 set :keep_releases, 2
-role :web, "hara@alisa.play-me.ru"                          # Your HTTP server, Apache/etc
-role :app, "hara@alisa.play-me.ru"                          # This may be the same as your `Web` server
-role :db,  "hara@alisa.play-me.ru", :primary => true # This is where Rails migrations will run
+role :web, "hara@harumambu.ru"                          # Your HTTP server, Apache/etc
+role :app, "hara@harumambu.ru"                          # This may be the same as your `Web` server
+role :db,  "hara@harumambu.ru", :primary => true # This is where Rails migrations will run
 set :use_sudo, false
 
 # If you are using Passenger mod_rails uncomment this:
@@ -41,4 +41,5 @@ namespace :rake do
     end
   end
 end
+
 
