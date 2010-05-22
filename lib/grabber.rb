@@ -41,7 +41,7 @@ def process(klass)
 
     if attachments.is_a?(Array)
       attachments.each do |attachment|
-        id = $attachments_db.insert(attachment.updatete(:project_id => project_id))
+        id = $attachments_db.insert(attachment.update(:project_id => project_id))
       end
     end
   end
