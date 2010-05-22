@@ -1,8 +1,8 @@
 class Notifier < ActionMailer::Base
-  default :from => "haramambu@haramambu.ru"
+  default :from => "harumambu@harumambu.ru"
 
   def feedback(message)
     @message = message
-    mail(:to => 'pavel@golubeff.ru', :subject => "haramambu.ru")
+    mail(:to => 'pavel@golubeff.ru', :subject => "harumambu.ru")
   end
 end
