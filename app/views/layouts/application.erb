@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title> harumambu.ru — Весь фриланс рунета, фрилансер, freelancer, freelance, free-lance, удаленная работа, телеработа, акуудфтсу, акуу-дфтсу, ahbkfyc, free-lance.ru, weblancer.net, dalance.ru, freelancer.ru</title>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+    <meta name="keywords" content="фриланс freelancer freelance free lance фрилансер фри ланс телеработа работа на дому удаленная работа дизайн конкурс фриленс freelans freelanser job графика сайт заработок в интернете работа в сети домашний бизнес 1c верстка рисунок 3d фриленс">
+    <meta name="description" content="Harumambu.ru — Весь фриланс рунета, фрилансер, freelancer, freelance, free-lance, удаленная работа, телеработа, акуудфтсу, акуу-дфтсу, ahbkfyc, free-lance.ru, weblancer.net, dalance.ru, freelancer.ru">
+    <%= javascript_include_tag "jquery"%>
+    <%= javascript_include_tag "rails"%>
+    <%= javascript_include_tag "application"%>
+    <%= javascript_include_tag 'swfobject'%>
+    <%= javascript_include_tag 'jqModal'%>
+    <%= stylesheet_link_tag 'style','default'%>
+    <meta name = "csrf-token" content = "form_authenticity_token" >
+    <meta name = "csrf-param" content = "authenticity_token" >
+<!--[if IE 6]>
+    <%= javascript_include_tag 'DD_belatedPNG'%>
+    <script>DD_belatedPNG.fix('.project, #projectop, #projecbottom');</script>
+<![endif]--> 
+    </head>
+    <body>
+    <%= yield %>
+    <!--LiveInternet counter--><script type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click' target=_blank><img onload='this.style.display=\"none\"' src='//counter.yadro.ru/hit?t24.13;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' title='LiveInternet: показано число посетителей за сегодня'><\/a>")</script><!--/LiveInternet-->
+    </body>    
+</html>

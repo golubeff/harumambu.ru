@@ -1,22 +1,27 @@
-body { font-family: Georgia; font-size: 16px }
+/*body { font-family: Georgia; font-size: 16px }
+
 .project { width: 600px; border-top: 1px solid #ddd; padding: 10px 15px 15px 15px }
+
 .project h3 { margin: 0 }
 .project strong { float: right }
-.project.match { border: 10px solid red }
+
+.project.match { border: 2px solid red }
+*/
+
 #nav { text-align: center }
 #loader { position: absolute; margin-top: -100px; margin-left: 650px; }
 #notifier { position: fixed; top: 10px; right: 45px; width: 220px; }
-textarea, select, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #666; }
-#feedback { position : fixed; bottom: 0px; right: 20px; background: white; height: 100%; }
+/*textarea, select, input { font-family : Georgia; font-size: 20px; padding: 4px; color: #666; }*/
+#feedback { position : fixed; bottom: 0px; right: 20px; margin: 10px; background: white; height: 170px; }
 #feedback textarea { width: 200px; height: 100px; color: #666 }
-#feedback textarea.hover { color: #000; width: 100%; height: 90%; margin: 10px }
+#feedback textarea.hover { color: #000; width: 100%; height: 90%; margin-bottom: 10px }
 #feedback p { padding: 5px }
 #counter { position: fixed; bottom: 10px; right: 10px }
 #flashbanner { position: absolute; left: -1000px }
 #controls { margin-bottom: 10px }
-#stop_words { width: 300px }
-#sources { position: fixed; right: 30px; bottom: 0px }
-input[type="button"], input[type="submit"] { font-size: 14px }
+/*#stop_words { width: 300px }*/
+/*#sources { position: fixed; right: 30px; bottom: 0px }*/
+/*input[type="button"], input[type="submit"] { font-size: 14px }*/
 #twitter { margin: 10px; text-align:  right }
 a img { border: 0 }
 .project img { float: left; margin-right: 5px }
@@ -44,12 +49,14 @@ a.up { float: right; text-decoration: none }
     left: 50%;
     
     margin-left: -300px;
-    width: 600px;
+    width: 637px;
+    height: auto;
     
     background-color: #EEE;
     color: #333;
     border: 1px solid black;
     padding: 12px;
+    #background: url(/images/middle.png) repeat-y ;
 }
 
 .jqmOverlay { background-color: #000; }

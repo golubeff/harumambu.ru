@@ -1,32 +1,69 @@
 <script type="text/javascript">
   window.first_id = <%= session[:first_id].to_i %>;
 </script>
+<a name="top"></a>
+
+<div id="loader"></div>
 <div id="flashbanner"></div>
-<div id="controls">
-  <form method="get" action="/">
-    <select name="strict" id="strict">
-      <option value="1">Найти</option>
-      <option value="0" <%= 'selected="selected"' if params[:strict] && params[:strict].to_i == 0 %>>Выделять</option>
-    </select> проекты, содержащие <input name="q" id="stop_words" value="<%= params[:q] %>" />
-  </form>
-  <input type="checkbox" <%= 'checked="checked"' if session[:new_window] %> onclick="$.post('/settings', { 'key' : 'new_window', 'value' : this.checked ? 1 : '' })" id="new_window" /> <label for="new_window">открыть ссылки в новом окне</label>
-</div>
+
+<div id="leftbl">
+
 <div id="projects">
   <%= will_paginate @projects %>
   <% @projects.reverse.each do |project| %>
     <div class="project" id="<%= project.id %>">
+      <div id="projectop"></div>
       <h3><%=raw ( project.category != '' ? (project.category.title + ', ') : '' ) %><a href="<%= project.url %>"><%=raw project.title %></a></h3>
       <p>Фриланс-проект: <%=raw project.desc %></p>
+      <div id="projectbottom"></div>
     </div>
   <% end %>
   <%= will_paginate @projects %>
 </div>
-<div id="notifier">
-  <strong><a href="/">Харумамбу.ру</a></strong>
-  <p>Мы первыми собираем все фриланс-проекты интернета.</p>
-  <p>Если вам не хватает каких-то функций на сайте, <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus()">напишите нам</a>.</p>
+
 </div>
-<div id="loader"></div>
+
+<div id="content">
+<div id="ris"></div>
+<div id="namelogo">
+<a href="/">Харумамбу.ру</a>
+<div id="logo_txt" style="text-decoration:none">
+Мы первыми собираем все фриланс-проекты интернета.
+</div>
+</div>
+
+<div id="search">
+<form action="/" method="get">
+<p>Поиск по объявлениям:</p>
+<input name="q" type="text" value="<%= params[:q]%>" id="stop_words" style="width:260px;" />
+
+<input name="" type="image" src="/images/arrow.gif" width="38" hspace="22" style="position: relative; top: 4px; left: 270px;" />
+<br /><br /><p>
+<input name="strict" type="radio" value="0"  <%= 'checked="checked"' if params[:strict] && params[:strict].to_i == 0 %> />выделять
+<input name="strict" type="radio" value="1" <%= 'checked="checked"' if (params[:strict] && params[:strict].to_i == 1 || !params[:strict]) %> />найти
+  <input type="checkbox" <%= 'checked="checked"' if session[:new_window] %> onclick="$.post('/settings', { 'key' : 'new_window', 'value' : this.checked ? 1 : '' })" id="new_window" /> <label for="new_window">открыть ссылки в новом окне</label>
+  <br><br><input type="checkbox" id="pause" /> <label for="pause">пауза</label>
+
+</p>
+    <script>
+$().ready(function() {
+
+    $('#categories').jqm({modal: true, trigger: '#categoriesTrigger'});
+    $('#sources').jqm({modal: true, trigger: '#sourcesTrigger'});
+});
+    </script>
+ 
+
+<p>
+  <a href="#" id="categoriesTrigger">Категории</a>
+  <a href="#" id="sourcesTrigger">Биржи</a>
+<br/><br/>
+
+</p>
+</form>
+
+
+
 <div id="categories" class="jqmWindow">
   <form method="post" action="/categories">
     <input type="hidden" name="redirect_to" value="<%= request.fullpath %>">
@@ -43,32 +80,51 @@
     <center><input type="submit" value="Ок" /> <input type="button" class="jqmClose" value="Закрыть" /></center>
   </form>
 </div>
-<div id="sources">
-  <input type="checkbox" id="pause" /> <label for="pause">пауза</label><br/><br/>
-  <a href="#" class="jqModal">Категории</a><br/><br/>
+
+<div id="sources" class="jqmWindow">
+    <a href="javascript:;" onclick="$('input.source').each(function(e, elem){elem.checked=true})">Все</a> 
+    <a onclick="$('input.source').each(function(e, elem){elem.checked=false})" href="javascript:;">Ни одной</a>
+    <br><br>
   <form method="post" action="/sources">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
     <input type="hidden" name="redirect_to" value="<%= request.fullpath %>">
-    <div id="sources_list" style="height: 141px; width: 200px; overflow-y: auto">
+    <!--div id="sources_list" style="height: 141px; width: 200px; overflow-y: auto"-->
+    <div id="sources_list">
       <% SOURCES.sort{|a,b| a.desc <=> b.desc}.each do |source| %>
         <div><input class="source" type="checkbox" <%= want_source?(source.name) ? 'checked="checked"' : '' %> id="source_<%= source.name %>" name="sources[<%= source.name %>]" value="1" /> <label for="source_<%=source.name%>"><img src="/images/icons/<%= source.name.underscore %>.gif" align="absmiddle" /> <%= source.desc %></label></div>
       <% end %>
     </div>
-    <br/><a href="javascript:;" onclick="$('input.source').each(function(e, elem){elem.checked=true})">Все</a> 
-    <a onclick="$('input.source').each(function(e, elem){elem.checked=false})" href="javascript:;">Ни одной</a><br/>
-    <br/><input type="submit" value="Применить" />
+    
+    <div style="clear: both">&nbsp;</div>
+
+    <center><input type="submit" value="Применить" />
+    <input type="button" class="jqmClose" value="Закрыть" /></center>
   </form>
-  <div id="twitter">
-    <a href="http://twitter.com/harumambu"><img src="/images/twitter.jpg" alt="" align="absmiddle" /></a>
-  </div>
+</div>
+
+
 
   <div id="feedback" class="invisible">
+    <h2>Написать</h2>
     <% form_tag :feedback, :remote => true  do |f| %>
       <%= text_area_tag :feedback_message, @feedback.message, :class => "hover"%><br/>
       <%= submit_tag 'Отправить' %>
       <input type="button" value="Отменить" onclick="$('#feedback').addClass('invisible');$('#contacts_lnk').show()">
     <% end %>
   </div>
+
+
+</div>
+
+
+<div id="copyright">
+На сайте чего-то не хватает? <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus()">напишите нам</a>.<br />
+© 2010 Павел Голубев
+    <a href="http://twitter.com/harumambu"><img src="/images/twitter.jpg" alt="" align="absmiddle" /></a>
+
+</div>
+
+<div id="arrow" onClick="window.location='#top'" style="cursor:pointer"></div>
 
 </div>
 

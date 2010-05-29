@@ -2,6 +2,7 @@
 // This file is automatically included by javascript_include_tag :defaults
 //
 $(document).ready(function(){
+    
   $(window).scroll(function(){
     if ($(window).scrollTop() == $(document).height() - $(window).height()){
       $('div#loader').html('<img src="/images/bigLoader.gif">');
@@ -87,13 +88,18 @@ function appendProject(json, after){
         if (matches) { sound() }
       }
 
-      html = '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project ' + ' '+ (matches ? 'match' : '') +'" id="' + project.id + '">' + 
-        '<img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
-        '<strong>' + project.budjet + '</strong>' +
+      html = 
+        '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + ' url(/images/middle-message.png) repeat-y;" class="project' + (matches ? ' match' : '') +'" id="' + project.id + '">' + 
+        '<div id="projectop"></div>'+
+        '<div id="projectzag"><img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a onclick="if($(\'#new_window:checked\').val()){window.open($(this).attr(\'href\'));return false;}else{return true}" href="' + project.url + '">' + project.title + '</a></h3>' +
+        '</div>' +
+        '<div id="projectzag_txt">'+
         '<p>' + project.desc + '</p>' +
-        '<a class="up" href="javascript:;" onclick="window.scroll(0,0)">↑</a>' +
-        '<div class="created_at">' + project.created_at + '</div>' +
+        '</div>' +
+        '<div id="projectdata">' + project.created_at + '</div>' +
+        '<div id="projectcena">' + project.budjet+ '</div>' +
+        '<div id="projectbottom"></div>'+
       '</div>';
 
       if( $('.project').length == 0 ) {
