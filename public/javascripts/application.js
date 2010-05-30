@@ -92,8 +92,7 @@ function appendProject(json, after){
         if (matches) { sound() }
       }
 
-      html = 
-        '<div style="background-color: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project' + (matches ? ' match' : '') +'" id="' + project.id + '">' + 
+      html = '<div style="background-color: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project' + (matches ? ' match' : '') +'" id="' + project.id + '">' + 
         '<div id="projectop"></div>'+
         '<div id="projectzag"><img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a onclick="if($(\'#new_window:checked\').val()){window.open($(this).attr(\'href\'));return false;}else{return true}" href="' + project.url + '">' + project.title + '</a></h3>' +
@@ -104,7 +103,7 @@ function appendProject(json, after){
         '<div id="projectcena">' + project.budjet+ '</div>' +
         '<div id="projectdata">' + project.created_at + '</div>' +
         '<div id="projectbottom"></div>'+
-      '</div>';
+        '</div>';
 
       if( $('.project').length == 0 ) {
         $('#projects').html(html);
