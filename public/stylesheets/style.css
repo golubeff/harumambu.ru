@@ -5,22 +5,30 @@ body{margin: 0;padding: 0; height: 100%; max-height: 100%; background:#f1f1f1}
 .project { margin: 5px 0 0 35px; width: 483px; background: #caffbe url("/images/middle-message.png") repeat-y;
     z-index: 1;}
 
+.project.match { background: #caffbe url(/images/middle-message-marker.png) repeat-y }
+
 /*.project h3 { margin: 0 }*/
 .project strong { float: right }
 
-.project.match { border: 2px solid red }
+.project.match {  }
+
+#sources_list div { width: 210px; float: left; margin-bottom: 3px }
     
 #projectop {width: 483px; height: 20px; background: url(/images/top-message.png) no-repeat;}
 
+.project.match #projectop { background: url(/images/top-message-marker.png) no-repeat }
+
 #projectbottom {width: 483px; height: 20px; background: url(/images/bottom-message.png) no-repeat;}
 
-#projectzag {margin: 0 0 0 35px; font: italic 18px Georgia, "Times New Roman", Times, serif; color: #003cff;}
+.project.match #projectbottom { background: url(/images/bottom-message-marker.png) no-repeat }
+
+#projectzag {margin: 0 15px 0 35px; font: italic 18px Georgia, "Times New Roman", Times, serif; color: #003cff;}
 
 #projectzag img {margin: 0 15px 0 0;}
 
 #projectdata {margin: 30px 0 0 35px; display: inline; font: italic 14px Georgia, "Times New Roman", Times, serif;}
 
-#projectcena {margin: 30px 30px 0 20px; display: inline; font: bold 20px Georgia, "Times New Roman", Times, serif; font-style: italic;}
+#projectcena {margin: 0px 30px 0 20px; display: block; float: right; font: bold 20px Georgia, "Times New Roman", Times, serif; font-style: italic;}
 
 #projectzag_txt {margin: 15px 35px 0; font: italic 14px Arial, Helvetica, sans-serif;}
 
@@ -45,10 +53,11 @@ body{margin: 0;padding: 0; height: 100%; max-height: 100%; background:#f1f1f1}
 #logo_txt {margin: 15px 0 0 0; font: italic 14px Georgia, "Times New Roman", Times, serif; color: #a6a6a6;}
 
 #ris {position: absolute; margin-left:-2px;top: 35px; width: 136px; height: 109px; background: url(/images/ris.jpg) no-repeat; border: 0px solid coral;}
+#ris img { margin: 24px 0 0 2px }
 
 #search {position: absolute; top: 140px; left:0%; width: 100%; height: 100px; border: 0px solid coral; font: 14px Arial, Helvetica, sans-serif; background: #f1f1f1;}
 
-#stop_words {position: absolute; width: 70%; height: 25px; margin: 7px 0 0 20px; padding: 8px 0 0 0; font: 16px Verdana, Arial, Helvetica, sans-serif; border: 1px solid #000; color: #666;}
+#stop_words {position: absolute; width: 70%; height: 25px; margin: 7px 0 0 20px; padding: 8px 0 0 8px; font: 16px Verdana, Arial, Helvetica, sans-serif; border: 1px solid #000; color: #666;}
 
 #search p {margin: 0; padding: 0 0 0 18px; width: 400px;}
 

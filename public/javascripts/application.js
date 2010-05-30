@@ -5,19 +5,23 @@ $(document).ready(function(){
     
   $(window).scroll(function(){
     if ($(window).scrollTop() == $(document).height() - $(window).height()){
-      $('div#loader').html('<img src="/images/bigLoader.gif">');
+      if(!window.loading_more){
+        window.loading_more = true;
+        $('div#ris').html('<img src="/images/bigLoader.gif">');
 
-      window.setTimeout( function(){
-        var url = '/projects.js?last_id=' + $('.project:last').attr('id');
-        if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
-        $.get(url,
-        function(data){
-          if (data != "") {
-            appendProject(eval('(' + data + ')'), true);
-          }
-          $('div#loader').empty();
-        });
-      }, 0 );
+        window.setTimeout( function(){
+          var url = '/projects.js?last_id=' + $('.project:last').attr('id');
+          if( document.location.href.match(/strict=1/) ) { url += '&strict=1&q=' + $('#stop_words').val() }
+          $.get(url,
+          function(data){
+            if (data != "") {
+              appendProject(eval('(' + data + ')'), true);
+            }
+            $('div#ris').empty();
+            window.loading_more = false;
+          });
+        }, 0 );
+      }
     }
   });
 
@@ -96,7 +100,6 @@ function appendProject(json, after){
         '<div id="projectzag_txt">'+
         '<p>' + project.desc + '</p>' +
         '</div>' +
-        '<div id="projectdata">' + project.created_at + '</div>' +
         '<div id="projectcena">' + project.budjet+ '</div>' +
         '<div id="projectbottom"></div>' +
         '</div>';

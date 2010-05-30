@@ -39,12 +39,13 @@
 
 <input name="" type="image" src="/images/arrow.gif" width="38" hspace="22" style="position: relative; top: 4px; left: 270px;" />
 <br /><br /><p>
-<input name="strict" type="radio" value="0"  <%= 'checked="checked"' if params[:strict] && params[:strict].to_i == 0 %> />выделять
-<input name="strict" type="radio" value="1" <%= 'checked="checked"' if (params[:strict] && params[:strict].to_i == 1 || !params[:strict]) %> />найти
-  <input type="checkbox" <%= 'checked="checked"' if session[:new_window] %> onclick="$.post('/settings', { 'key' : 'new_window', 'value' : this.checked ? 1 : '' })" id="new_window" /> <label for="new_window">открыть ссылки в новом окне</label>
-  <br><br><input type="checkbox" id="pause" /> <label for="pause">пауза</label>
+  <input name="strict" type="radio" id="strict_0" value="0"  <%= 'checked="checked"' if params[:strict] && params[:strict].to_i == 0 %> /> <label for="strict_0">выделять</label>
+  <input name="strict" type="radio" id="strict_1" value="1" <%= 'checked="checked"' if (params[:strict] && params[:strict].to_i == 1 || !params[:strict]) %> /> <label for="strict_1">найти</label>
+  <input style="margin-left: 25px" type="checkbox" <%= 'checked="checked"' if session[:new_window] %> onclick="$.post('/settings', { 'key' : 'new_window', 'value' : this.checked ? 1 : '' })" id="new_window" /> <label for="new_window">открыть ссылки в новом окне</label>
 
 </p>
+</form>
+
     <script>
 $().ready(function() {
 
@@ -54,13 +55,15 @@ $().ready(function() {
     </script>
  
 
-<p>
-  <a href="#" id="categoriesTrigger">Категории</a>
-  <a href="#" id="sourcesTrigger">Биржи</a>
+  <p><br/><br/>
+  Вы можете <a href="#" id="categoriesTrigger" style="margin: 0 8px 0 8px">выбрать категории</a> или
+  <a href="#" id="sourcesTrigger" style="margin: 0 8px 0 8px">выбрать биржи</a>
 <br/><br/>
 
+  <input type="checkbox" id="pause" /> <label for="pause">пауза</label>
+  <br/><br/>
+  Харумамбуру — проект с открытым <a href="http://github.com/golubeff/harumambu.ru">исходным кодом</a>.
 </p>
-</form>
 
 
 
@@ -118,9 +121,13 @@ $().ready(function() {
 
 
 <div id="copyright">
-На сайте чего-то не хватает? <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus()">напишите нам</a>.<br />
-© 2010 Павел Голубев
+  
+  На сайте чего-то не хватает? <a href="javascript:;" onclick="$('#feedback').removeClass('invisible');$('#feedback_message').focus()">напишите нам</a>.
     <a href="http://twitter.com/harumambu"><img src="/images/twitter.jpg" alt="" align="absmiddle" /></a>
+  
+<br/>Идея — <a href="http://golubeff.ru/">Павел Голубев</a><br/>
+Дизайн — Макс Вечеславов<br/>
+Разработка — <a href="http://golubeff.ru/">Павел Голубев</a> и <a href="http://2530360.ru">2530360.ru</a><br/><br/>
 
 </div>
 
