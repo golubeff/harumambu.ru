@@ -5,7 +5,7 @@ $(document).ready(function(){
     
   $(window).scroll(function(){
     if ($(window).scrollTop() == $(document).height() - $(window).height()){
-      $('div#loader').html('<img src="/images/bigLoader.gif">');
+      $('div#ris').html('<img src="/images/bigLoader.gif">');
 
       window.setTimeout( function(){
         var url = '/projects.js?last_id=' + $('.project:last').attr('id');
@@ -15,7 +15,7 @@ $(document).ready(function(){
           if (data != "") {
             appendProject(eval('(' + data + ')'), true);
           }
-          $('div#loader').empty();
+          $('div#ris').empty();
         });
       }, 0 );
     }
@@ -89,7 +89,7 @@ function appendProject(json, after){
       }
 
       html = 
-        '<div style="background: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + ' url(/images/middle-message.png) repeat-y;" class="project' + (matches ? ' match' : '') +'" id="' + project.id + '">' + 
+        '<div style="background-color: ' + (window.first_id >= project.id ? '#cfcfcf' : 'rgb('+r+','+g+','+b+')') + '" class="project' + (matches ? ' match' : '') +'" id="' + project.id + '">' + 
         '<div id="projectop"></div>'+
         '<div id="projectzag"><img src="/images/icons/'+ project.icon +'.gif" alt="" />' + 
         '<h3>'+ (project.category != '' ? (project.category +' &raquo; ') : '') + '<a onclick="if($(\'#new_window:checked\').val()){window.open($(this).attr(\'href\'));return false;}else{return true}" href="' + project.url + '">' + project.title + '</a></h3>' +
@@ -97,8 +97,8 @@ function appendProject(json, after){
         '<div id="projectzag_txt">'+
         '<p>' + project.desc + '</p>' +
         '</div>' +
-        '<div id="projectdata">' + project.created_at + '</div>' +
         '<div id="projectcena">' + project.budjet+ '</div>' +
+        '<div id="projectdata">' + project.created_at + '</div>' +
         '<div id="projectbottom"></div>'+
       '</div>';
 
