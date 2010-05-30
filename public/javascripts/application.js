@@ -103,7 +103,7 @@ function appendProject(json, after){
         '<div id="projectcena">' + project.budjet+ '</div>' +
         '<div id="projectdata">' + project.created_at + '</div>' +
         '<div id="projectbottom"></div>'+
-      '</div>';
+        '</div>';
 
       if( $('.project').length == 0 ) {
         $('#projects').html(html);
