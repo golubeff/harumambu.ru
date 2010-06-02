@@ -55,12 +55,12 @@ class FreeLanceRu
 
       #args[:created_at] = convert(stats.children.last.content.gsub(/^(&nbsp;)+/, ''))
       args[:attachments] = []
-      (project_div/".flw_offer_attach").each do |attachment|
-        args[:attachments] << {
-          :url => attachment.at("a")['href'],
-          :title => convert(attachment.children[2].to_s)
-        }
-      end
+      #(project_div/".flw_offer_attach").each do |attachment|
+        #args[:attachments] << {
+          #:url => attachment.at("a")['href'],
+          #:title => convert(attachment.children[2].to_s)
+        #}
+      #end
 
       resultset << args
     end
