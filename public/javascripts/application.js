@@ -127,3 +127,20 @@ function sound(){
   so.addParam('flashvars','file=message.mp3&autostart=true');
   so.write('flashbanner');
 }
+
+function showRss(){
+  var sources = []; var categories = [];
+  $('#sources_list input:checked').each( 
+    function(i, elem) { 
+      sources.push('sources[' + elem.id.replace(/^source_/, '') + ']=1');
+    } 
+  );
+
+  $('#categories .category input:checked').each(
+    function(i, elem) {
+      categories.push('categories[' + elem.id.replace(/^category_/, '') + ']=1');
+    }
+  );
+
+  document.location.href = '/rss?q=' + $('#stop_words').val() + '&strict=1&' + sources.join('&') + '&' + categories.join('&')
+}

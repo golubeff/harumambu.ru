@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>harumambu.ru</title>
+    <link>http://harumambu.ru</link>
+    <description>Весь фриланс в одном месте</description>
+    <% @projects.reverse.each do |record| %>
+      <item>
+        <title>
+          <%= record.category.title.to_s + ':' if record.category %> 
+          <%= record.title %> 
+          <%= "(#{record.budjet_with_currency})" if record.budjet_with_currency.present? %>
+        </title>
+        <description>
+        <%= record.desc %> &lt;br&gt;<%=l record.created_at %>
+        </description>
+        <link><%= record.url %></link>
+        <guid><%= record.id %></guid>
+      </item>
+    <% end %>
+  </channel>
+</rss>
+

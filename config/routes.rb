@@ -56,6 +56,7 @@ Freelance::Application.routes.draw do |map|
   resources :categories
   resources :sources
   match "settings", :to => "application#settings"
+  match "rss", :to => "projects#index", :format => "rss"
 
   # See how all your routes lay out with "rake routes"
 
