@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_filter :fill_session_from_params
   resource_this :will_paginate => 10
   before_filter :new_feedback, :only => [ :index ]
 
@@ -8,6 +9,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render :layout => false }
+      format.rss { render :layout => false }
     end
   end
 
@@ -63,5 +65,10 @@ class ProjectsController < ApplicationController
     end
 
     options
+  end
+
+  def fill_session_from_params
+    session[:categories] = params[:categories] if params[:categories]
+    session[:sources] = params[:sources] if params[:sources]
   end
 end

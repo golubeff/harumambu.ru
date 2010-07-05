@@ -51,7 +51,7 @@ end
 loop do
   SOURCES.each do |klass|
     begin
-      timeout(30) do
+      timeout(90) do
         process(klass)
       end
     rescue Exception => e
