@@ -12,7 +12,8 @@ class FreeLanceRu
   CURRENCIES = { 'Р.' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
   def self.latest
-    doc = Hpricot(open('http://free-lance.ru/'))
+    data = `curl http://www.free-lance.ru 2>/dev/null`
+    doc = Hpricot(data)
 
     #doc = Hpricot(open('http://free-lance.ru/'))
     args = {}
