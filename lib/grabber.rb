@@ -16,7 +16,7 @@ require File.dirname(__FILE__) + "/../lib/acula_org.rb"
 require File.dirname(__FILE__) + "/../lib/freelance_tomsk_ru.rb"
 require File.dirname(__FILE__) + "/../lib/freelancehunt_com.rb"
 require File.dirname(__FILE__) + "/../lib/getacoder_com.rb"
-require File.dirname(__FILE__) + "/../lib/vworker_com.rb"
+require File.dirname(__FILE__) + "/../lib/v_worker_com.rb"
 
 
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
