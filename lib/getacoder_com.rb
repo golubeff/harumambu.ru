@@ -58,7 +58,7 @@ class GetacoderCom
       link = project_div.link
       id = link.match(/\_(\d+)\.html/)[1].to_i
       last_id = nil
-      last_id = Project.first(:conditions=>"remote_id = '#{id}' and klass = 'GetacoderCom'")
+      last_id = DB["select id from projects where remote_id = '#{id}' and klass = 'VWorkerCom'"].first
      
       break if last_id != nil
       

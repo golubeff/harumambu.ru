@@ -56,10 +56,11 @@ class VWorkerCom
       args = {}
       
       args[:title] = project_div.title.split("--")[0]
+      puts args[:title]
       link = project_div.link
       id = link.match(/lngBidRequestId=(\d+)/)[1].to_i
       last_id = nil
-      last_id = Project.first(:conditions=>"remote_id = '#{id}' and klass = 'VWorkerCom'")
+      last_id = DB["select id from projects where remote_id = '#{id}' and klass = 'VWorkerCom'"].first
      
       break if last_id != nil
       
@@ -71,7 +72,7 @@ class VWorkerCom
       currency = '$'
 
       if project_div.title.split("--")[2].match(/Max Bid: \$(\d+)/)
-	budjet = project_div.title.split("--")[2].match(/Max Bid: \$(\d+)/)[1]   
+        budjet = project_div.title.split("--")[2].match(/Max Bid: \$(\d+)/)[1]   
       end
 
       if budjet
