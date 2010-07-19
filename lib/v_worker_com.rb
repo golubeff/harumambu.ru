@@ -56,7 +56,7 @@ class VWorkerCom
       args = {}
       
       args[:title] = project_div.title.split("--")[0]
-      puts args[:title]
+      #puts args[:title]
       link = project_div.link
       id = link.match(/lngBidRequestId=(\d+)/)[1].to_i
       last_id = nil
