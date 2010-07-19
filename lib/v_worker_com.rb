@@ -8,7 +8,7 @@ require 'iconv'
 require 'uri'
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
 
-class VWokerCom
+class VWorkerCom
   
   CURRENCIES = { 'руб' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
@@ -59,7 +59,7 @@ class VWokerCom
       link = project_div.link
       id = link.match(/lngBidRequestId=(\d+)/)[1].to_i
       last_id = nil
-      last_id = Project.first(:conditions=>"remote_id = '#{id}' and klass = 'VWokerCom'")
+      last_id = Project.first(:conditions=>"remote_id = '#{id}' and klass = 'VWorkerCom'")
      
       break if last_id != nil
       

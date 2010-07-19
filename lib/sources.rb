@@ -14,5 +14,5 @@ SOURCES = [
   FreelanceTomskRu,
   FreelancehuntCom,
   GetacoderCom,
-  VWokerCom
+  VWorkerCom
 ]
