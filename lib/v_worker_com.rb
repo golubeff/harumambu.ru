@@ -34,7 +34,7 @@ class VWorkerCom
   }
 
   def self.desc
-    'vwoker.com'
+    'vworker.com'
   end
 
   def self.latest
