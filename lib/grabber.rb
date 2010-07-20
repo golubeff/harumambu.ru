@@ -16,7 +16,7 @@ require File.dirname(__FILE__) + "/../lib/acula_org.rb"
 require File.dirname(__FILE__) + "/../lib/freelance_tomsk_ru.rb"
 require File.dirname(__FILE__) + "/../lib/freelancehunt_com.rb"
 require File.dirname(__FILE__) + "/../lib/getacoder_com.rb"
-require File.dirname(__FILE__) + "/../lib/vworker_com.rb"
+require File.dirname(__FILE__) + "/../lib/v_worker_com.rb"
 
 
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
@@ -32,9 +32,9 @@ $others_category = DB["select id from categories where title like 'Прочее'
 def process(klass)
   project_datas = klass.latest
 
-  existing_project_ids = $projects_db.where(:klass => klass.name, :remote_id => project_datas.map{|it| it[:remote_id] }).map(:remote_id)
+  existing_project_ids = $projects_db.where(:klass => klass.name, :remote_id => project_datas.map{|it| it[:remote_id].to_s }).map(:remote_id)
 
-  project_datas.select{|it| !existing_project_ids.include?(it[:remote_id]) }.each do |project_data|
+  project_datas.select{|it| !existing_project_ids.include?(it[:remote_id].to_s) }.each do |project_data|
     attachments = project_data[:attachments]
     project_data[:klass] = klass.name
     project_data.delete(:attachments)

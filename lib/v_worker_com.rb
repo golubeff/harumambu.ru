@@ -8,7 +8,7 @@ require 'iconv'
 require 'uri'
 require File.dirname(__FILE__) + '/../lib/sequel_adapter.rb'
 
-class GetacoderCom
+class VWorkerCom
   
   CURRENCIES = { 'руб' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
@@ -34,7 +34,7 @@ class GetacoderCom
   }
 
   def self.desc
-    'getacoder.com'
+    'vworker.com'
   end
 
   def self.latest
@@ -43,7 +43,7 @@ class GetacoderCom
 
   #По идее обновляется почти одновременно с основным выводом (я разницы во времени не заметил)
   def self.rss
-    source = "http://getacoder.com/rss.xml" # url or local file
+    source = "http://www.vworker.com/RentACoder/misc/LinkToUs/RssFeed_newBidRequests.asp?blnAllOpen=true" # url or local file
     content = "" # raw content of rss feed will be loaded here
     open(source) do |s| content = s.read end
     #open(source, :proxy=>'http://192.168.0.250:3128') do |s| content = s.read end
@@ -54,15 +54,13 @@ class GetacoderCom
     #puts convert(doc.to_s)
     rss.items.each do |project_div|
       args = {}
-      args[:title] = project_div.title
+      
+      args[:title] = project_div.title.split("--")[0]
+      #puts args[:title]
       link = project_div.link
-      id = link.match(/\_(\d+)\.html/)[1].to_i
+      id = link.match(/lngBidRequestId=(\d+)/)[1].to_i
       last_id = nil
-<<<<<<< HEAD
-      last_id = Project.first(:conditions=>"remote_id = '#{id}' and klass = 'GetacoderCom'")
-=======
       last_id = DB["select id from projects where remote_id = '#{id}' and klass = 'VWorkerCom'"].first
->>>>>>> 57edaa38234697ef45ca61dc7584f0400b40e5d6
      
       break if last_id != nil
       
@@ -73,11 +71,8 @@ class GetacoderCom
       budjet = nil
       currency = '$'
 
-      doc  = Hpricot(open(URI.escape("#{link}")))
-      #doc  = Hpricot(open(URI.escape("#{link}"),:proxy=>'http://192.168.0.250:3128'))
-      doc3 = doc.inner_html
-      if doc3.match(/<td><small>.+?(\d+)-(\d+)<\/small><\/td>/)
-	budjet = doc3.match(/<td><small>.+?(\d+)-(\d+)<\/small><\/td>/)[2]   
+      if project_div.title.split("--")[2].match(/Max Bid: \$(\d+)/)
+        budjet = project_div.title.split("--")[2].match(/Max Bid: \$(\d+)/)[1]   
       end
 
       if budjet
@@ -85,16 +80,9 @@ class GetacoderCom
         args[:currency] = CURRENCIES[currency]
       end
       begin
-        arr_cat=project_div.description.gsub(/^(.+?)Required Skills: /,"").split(",")
-        arr_cat.each do |matched|
-    	    category = nil
-    	    category = CATEGORIES[matched]
-    	    if category
-    		#args[:category_name]=category
-    		args[:category_id] = DB["select id from categories where title ilike E'%#{category}%'"].first[:id]
-    		break
-    	    end
-        end
+    	    category = CATEGORIES['Miscellaneous']
+    	    #args[:category_name]=category
+    	    args[:category_id] = DB["select id from categories where title ilike E'%#{category}%'"].first[:id]
       rescue Exception => e
         puts e
       end

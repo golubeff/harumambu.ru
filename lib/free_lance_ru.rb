@@ -12,7 +12,8 @@ class FreeLanceRu
   CURRENCIES = { 'Р.' => "руб.", "$" => '$', '&euro;' => '€', "FM" => 'FM' }
 
   def self.latest
-    doc = Hpricot(open('http://free-lance.ru/'))
+    data = `curl http://www.free-lance.ru 2>/dev/null`
+    doc = Hpricot(data)
 
     #doc = Hpricot(open('http://free-lance.ru/'))
     args = {}
@@ -31,7 +32,8 @@ class FreeLanceRu
       #puts "#{args[:title]} #{args[:remote_id]}"
       args[:url] = "http://free-lance.ru/projects/?pid=#{args[:remote_id]}"
 
-      inner_doc = convert(open(args[:url]).read)
+      inner_data = `curl #{args[:url]} 2>/dev/null`
+      inner_doc = convert(inner_data)
       category = inner_doc.scan(/Раздел: *(.+?) *<\/div/m)[0]
       category = category[0].gsub(/&nbsp;/, ' ').gsub(/ \/.+$/, '') unless category.nil?
       begin

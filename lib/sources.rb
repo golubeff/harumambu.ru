@@ -13,6 +13,6 @@ SOURCES = [
   AculaOrg,
   FreelanceTomskRu,
   FreelancehuntCom,
-  GetacoderCom,
-  VWokerCom
+  #GetacoderCom,
+  #VWorkerCom
 ]
