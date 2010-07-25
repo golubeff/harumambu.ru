@@ -19,4 +19,4 @@ config/database.yml
 config/cucumber.yml
 rerun.txt
 capybara-*.html
-
+nbproject

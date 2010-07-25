@@ -43,7 +43,7 @@ class VWorkerCom
 
   #По идее обновляется почти одновременно с основным выводом (я разницы во времени не заметил)
   def self.rss
-    source = "http://www.vworker.com/RentACoder/misc/LinkToUs/RssFeed_newBidRequests.asp?blnAllOpen=true" # url or local file
+    source = "http://www.vworker.com/RentACoder/misc/LinkToUs/RssFeed_newBidRequests.asp" # url or local file
     content = "" # raw content of rss feed will be loaded here
     open(source) do |s| content = s.read end
     #open(source, :proxy=>'http://192.168.0.250:3128') do |s| content = s.read end
