@@ -8,6 +8,7 @@
 .project.match { border: 2px solid red }
 */
 
+#ads { position: fixed; border-bottom: 1px solid #666; z-index:1000; width: 100%; padding: 2px 5px 2px 5px; background: orange }
 #nav { text-align: center }
 #loader { position: absolute; margin-top: -100px; margin-left: 650px; }
 #notifier { position: fixed; top: 10px; right: 45px; width: 220px; }
